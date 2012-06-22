@@ -2,17 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft.jar/jars/bin/jinput.jar">
+	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft-Client/jars/bin/lwjgl_util.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Client/jars/bin/natives"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft.jar/jars/bin/lwjgl_util.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Client/jars/bin/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft.jar/jars/bin/minecraft.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft.jar/jars/bin/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft-Client/jars/bin/minecraft.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft-Client/jars/bin/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Documents/GitHub/Unicraft-Client/jars/bin/jinput.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

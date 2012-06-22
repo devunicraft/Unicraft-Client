@@ -2,6 +2,16 @@
 ## Eclipse
 #################
 
+#Dossiers propres à minecraft, à ne pas garder
+saves/
+stats/
+mods/
+resources/
+config/
+texturepacks/
+ModLoader.txt
+options.txt
+
 *.pydevproject
 bin/
 tmp/
