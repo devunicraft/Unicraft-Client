@@ -550,7 +550,7 @@ public abstract class Minecraft implements Runnable
     {
         if (minecraftDir == null)
         {
-            minecraftDir = getAppDir("minecraft");
+            minecraftDir = getAppDir("unicraft");
         }
 
         return minecraftDir;
