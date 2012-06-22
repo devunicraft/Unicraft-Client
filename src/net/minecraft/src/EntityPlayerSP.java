@@ -38,7 +38,7 @@ public class EntityPlayerSP extends EntityPlayer
 
         if (par3Session != null && par3Session.username != null && par3Session.username.length() > 0)
         {
-            skinUrl = (new StringBuilder()).append("http://s3.amazonaws.com/MinecraftSkins/").append(par3Session.username).append(".png").toString();
+            skinUrl = (new StringBuilder()).append("http://dl.dropbox.com/u/87115331/LauncherUnicraft/Skins/").append(par3Session.username).append(".png").toString();
         }
 
         username = par3Session.username;
