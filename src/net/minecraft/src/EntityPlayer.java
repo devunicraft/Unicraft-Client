@@ -433,7 +433,7 @@ public abstract class EntityPlayer extends EntityLiving
 
     public void updateCloak()
     {
-        playerCloakUrl = (new StringBuilder()).append("http://s3.amazonaws.com/MinecraftCloaks/").append(username).append(".png").toString();
+        playerCloakUrl = (new StringBuilder()).append("http://dl.dropbox.com/u/87115331/LauncherUnicraft/Capes/").append(username).append(".png").toString();
         cloakUrl = playerCloakUrl;
     }
 
