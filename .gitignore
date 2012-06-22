@@ -3,8 +3,6 @@
 #################
 
 *.pydevproject
-.project
-.metadata
 bin/
 tmp/
 *.tmp
@@ -12,8 +10,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.classpath
-.settings/
 .loadpath
 
 # External tool builders
@@ -24,10 +20,6 @@ local.properties
 
 # CDT-specific
 .cproject
-
-# PDT-specific
-.buildpath
-
 
 #################
 ## Visual Studio
