@@ -7,18 +7,13 @@ public enum EnumRarity
     rare(11, "Rare"),
     epic(13, "Epic");
 
-    /**
-     * A decimal representation of the hex color codes of a the color assigned to this rarity type. (13 becomes d as in
-     * \247d which is light purple)
-     */
-    public final int rarityColor;
-
-    /** Rarity name. */
-    public final String rarityName;
+    /** The color given to the name of items with that rarity. */
+    public final int nameColor;
+    public final String field_40532_f;
 
     private EnumRarity(int par3, String par4Str)
     {
-        rarityColor = par3;
-        rarityName = par4Str;
+        nameColor = par3;
+        field_40532_f = par4Str;
     }
 }

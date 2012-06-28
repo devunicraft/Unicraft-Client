@@ -22,7 +22,7 @@ public class MovementInput
         sneak = false;
     }
 
-    public void updatePlayerMoveState()
+    public void func_52013_a()
     {
     }
 }

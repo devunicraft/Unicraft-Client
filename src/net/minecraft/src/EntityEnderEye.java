@@ -5,15 +5,9 @@ import java.util.Random;
 public class EntityEnderEye extends Entity
 {
     public int field_40096_a;
-
-    /** 'x' location the eye should float towards. */
-    private double targetX;
-
-    /** 'y' location the eye should float towards. */
-    private double targetY;
-
-    /** 'z' location the eye should float towards. */
-    private double targetZ;
+    private double field_40094_b;
+    private double field_40095_c;
+    private double field_40091_d;
     private int despawnTimer;
     private boolean shatterOrDrop;
 
@@ -49,11 +43,7 @@ public class EntityEnderEye extends Entity
         yOffset = 0.0F;
     }
 
-    /**
-     * The location the eye should float/move towards. Currently used for moving towards the nearest stronghold. Args:
-     * strongholdX, strongholdY, strongholdZ
-     */
-    public void moveTowards(double par1, int par3, double par4)
+    public void func_40090_a(double par1, int par3, double par4)
     {
         double d = par1 - posX;
         double d1 = par4 - posZ;
@@ -61,15 +51,15 @@ public class EntityEnderEye extends Entity
 
         if (f > 12F)
         {
-            targetX = posX + (d / (double)f) * 12D;
-            targetZ = posZ + (d1 / (double)f) * 12D;
-            targetY = posY + 8D;
+            field_40094_b = posX + (d / (double)f) * 12D;
+            field_40091_d = posZ + (d1 / (double)f) * 12D;
+            field_40095_c = posY + 8D;
         }
         else
         {
-            targetX = par1;
-            targetY = par3;
-            targetZ = par4;
+            field_40094_b = par1;
+            field_40095_c = par3;
+            field_40091_d = par4;
         }
 
         despawnTimer = 0;
@@ -121,8 +111,8 @@ public class EntityEnderEye extends Entity
 
         if (!worldObj.isRemote)
         {
-            double d = targetX - posX;
-            double d1 = targetZ - posZ;
+            double d = field_40094_b - posX;
+            double d1 = field_40091_d - posZ;
             float f2 = (float)Math.sqrt(d * d + d1 * d1);
             float f3 = (float)Math.atan2(d1, d);
             double d2 = (double)f + (double)(f2 - f) * 0.0025000000000000001D;
@@ -136,7 +126,7 @@ public class EntityEnderEye extends Entity
             motionX = Math.cos(f3) * d2;
             motionZ = Math.sin(f3) * d2;
 
-            if (posY < targetY)
+            if (posY < field_40095_c)
             {
                 motionY = motionY + (1.0D - motionY) * 0.014999999664723873D;
             }

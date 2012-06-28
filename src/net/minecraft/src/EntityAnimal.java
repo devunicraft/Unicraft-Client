@@ -376,10 +376,7 @@ public abstract class EntityAnimal extends EntityAgeable
         inLove = 0;
     }
 
-    /**
-     * Returns true if the mob is currently able to mate with the specified mob.
-     */
-    public boolean canMateWith(EntityAnimal par1EntityAnimal)
+    public boolean func_48135_b(EntityAnimal par1EntityAnimal)
     {
         if (par1EntityAnimal == this)
         {

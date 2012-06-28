@@ -25,7 +25,7 @@ public class WorldType
     private boolean canBeCreated;
     private boolean field_48638_h;
 
-    public WorldType(int par1, String par2Str)
+    private WorldType(int par1, String par2Str)
     {
         this(par1, par2Str, 0);
     }
@@ -48,7 +48,7 @@ public class WorldType
      */
     public String getTranslateName()
     {
-        return (new StringBuilder("generator.")).append(worldType).toString();
+        return (new StringBuilder()).append("generator.").append(worldType).toString();
     }
 
     /**
@@ -61,7 +61,14 @@ public class WorldType
 
     public WorldType func_48629_a(int par1)
     {
-        return this != DEFAULT || par1 != 0 ? this : DEFAULT_1_1;
+        if (this == DEFAULT && par1 == 0)
+        {
+            return DEFAULT_1_1;
+        }
+        else
+        {
+            return this;
+        }
     }
 
     /**
@@ -103,44 +110,5 @@ public class WorldType
         }
 
         return null;
-    }
-
-    public WorldChunkManager getChunkManager(World world)
-    {
-        if (this == FLAT)
-        {
-            return new WorldChunkManagerHell(BiomeGenBase.plains, 0.5F, 0.5F);
-        }
-        else
-        {
-            return new WorldChunkManager(world);
-        }
-    }
-
-    public IChunkProvider getChunkGenerator(World world)
-    {
-        if (this == FLAT)
-        {
-            return new ChunkProviderFlat(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
-        }
-        else
-        {
-            return new ChunkProviderGenerate(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
-        }
-    }
-
-    public int getSeaLevel(World world)
-    {
-        return this != FLAT ? 64 : 4;
-    }
-
-    public boolean hasVoidParticles(boolean flag)
-    {
-        return this != FLAT && !flag;
-    }
-
-    public double voidFadeMagnitude()
-    {
-        return this != FLAT ? 0.03125D : 1.0D;
     }
 }

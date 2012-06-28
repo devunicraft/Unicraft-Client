@@ -66,8 +66,8 @@ public class Material
     private boolean canHarvest;
 
     /**
-     * Mobility information flag. 0 indicates that this block is normal, 1 indicates that it can't push other blocks, 2
-     * indicates that it can't be pushed.
+     * Mobility information / flag of the material. 0 = normal, 1 = can't be push but enabled piston to move over it, 2
+     * = can't be pushed and stop pistons
      */
     private int mobilityFlag;
 
@@ -159,7 +159,7 @@ public class Material
     }
 
     /**
-     * Indicate if the material is opaque
+     * Indicates if the material is translucent
      */
     public boolean isOpaque()
     {

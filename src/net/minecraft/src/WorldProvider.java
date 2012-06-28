@@ -63,7 +63,14 @@ public abstract class WorldProvider
      */
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = terrainType.getChunkManager(worldObj);
+        if (worldObj.getWorldInfo().getTerrainType() == WorldType.FLAT)
+        {
+            worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.plains, 0.5F, 0.5F);
+        }
+        else
+        {
+            worldChunkMgr = new WorldChunkManager(worldObj);
+        }
     }
 
     /**
@@ -71,7 +78,14 @@ public abstract class WorldProvider
      */
     public IChunkProvider getChunkProvider()
     {
-        return terrainType.getChunkGenerator(worldObj);
+        if (terrainType == WorldType.FLAT)
+        {
+            return new ChunkProviderFlat(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        }
+        else
+        {
+            return new ChunkProviderGenerate(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        }
     }
 
     /**
@@ -179,7 +193,24 @@ public abstract class WorldProvider
 
     public static WorldProvider getProviderForDimension(int par0)
     {
-        return ((WorldProvider)(par0 != -1 ? par0 != 0 ? par0 != 1 ? null : new WorldProviderEnd() : new WorldProviderSurface() : new WorldProviderHell()));
+        if (par0 == -1)
+        {
+            return new WorldProviderHell();
+        }
+
+        if (par0 == 0)
+        {
+            return new WorldProviderSurface();
+        }
+
+        if (par0 == 1)
+        {
+            return new WorldProviderEnd();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /**
@@ -205,7 +236,7 @@ public abstract class WorldProvider
 
     public int getAverageGroundLevel()
     {
-        return terrainType.getSeaLevel(worldObj);
+        return terrainType != WorldType.FLAT ? 64 : 4;
     }
 
     /**
@@ -213,7 +244,7 @@ public abstract class WorldProvider
      */
     public boolean getWorldHasNoSky()
     {
-        return terrainType.hasVoidParticles(hasNoSky);
+        return terrainType != WorldType.FLAT && !hasNoSky;
     }
 
     /**
@@ -223,7 +254,7 @@ public abstract class WorldProvider
      */
     public double getVoidFogYFactor()
     {
-        return terrainType.voidFadeMagnitude();
+        return terrainType != WorldType.FLAT ? 0.03125D : 1.0D;
     }
 
     public boolean func_48218_b(int par1, int par2)

@@ -129,8 +129,8 @@ public abstract class EntityLiving extends Entity
 
     /** The active target the Task system uses for tracking */
     private EntityLiving attackTarget;
-    private EntitySenses senses;
-    private float AIMoveSpeed;
+    private EntitySenses field_48104_at;
+    private float field_48111_au;
     private ChunkCoordinates homePosition;
 
     /** If -1 there is no maximum distance */
@@ -174,7 +174,7 @@ public abstract class EntityLiving extends Entity
     /** Number of ticks since last jump */
     private int jumpTicks;
 
-    /** This entity's current target. */
+    /** This entities' current target */
     private Entity currentTarget;
 
     /** How long to keep a specific target entity */
@@ -232,7 +232,7 @@ public abstract class EntityLiving extends Entity
         jumpHelper = new EntityJumpHelper(this);
         bodyHelper = new EntityBodyHelper(this);
         navigator = new PathNavigate(this, par1World, 16F);
-        senses = new EntitySenses(this);
+        field_48104_at = new EntitySenses(this);
         field_9363_r = (float)(Math.random() + 1.0D) * 0.01F;
         setPosition(posX, posY, posZ);
         field_9365_p = (float)Math.random() * 12398F;
@@ -261,12 +261,9 @@ public abstract class EntityLiving extends Entity
         return navigator;
     }
 
-    /**
-     * returns the EntitySenses Object for the EntityLiving
-     */
-    public EntitySenses getEntitySenses()
+    public EntitySenses func_48090_aM()
     {
-        return senses;
+        return field_48104_at;
     }
 
     public Random getRNG()
@@ -297,28 +294,19 @@ public abstract class EntityLiving extends Entity
         return entityAge;
     }
 
-    /**
-     * Sets the head's yaw rotation of the entity.
-     */
-    public void setHeadRotationYaw(float par1)
+    public void func_48079_f(float par1)
     {
         rotationYawHead = par1;
     }
 
-    /**
-     * the movespeed used for the new AI system
-     */
-    public float getAIMoveSpeed()
+    public float func_48101_aR()
     {
-        return AIMoveSpeed;
+        return field_48111_au;
     }
 
-    /**
-     * set the movespeed used for the new AI system
-     */
-    public void setAIMoveSpeed(float par1)
+    public void func_48098_g(float par1)
     {
-        AIMoveSpeed = par1;
+        field_48111_au = par1;
         setMoveForward(par1);
     }
 
@@ -1255,7 +1243,7 @@ public abstract class EntityLiving extends Entity
             {
                 if (isAIEnabled())
                 {
-                    f2 = getAIMoveSpeed();
+                    f2 = func_48101_aR();
                 }
                 else
                 {
@@ -1603,7 +1591,7 @@ public abstract class EntityLiving extends Entity
     }
 
     /**
-     * Causes this entity to do an upwards motion (jumping).
+     * jump, Causes this entity to do an upwards motion (jumping)
      */
     protected void jump()
     {
@@ -1669,7 +1657,7 @@ public abstract class EntityLiving extends Entity
         despawnEntity();
         Profiler.endSection();
         Profiler.startSection("sensing");
-        senses.clearSensingCache();
+        field_48104_at.clearSensingCache();
         Profiler.endSection();
         Profiler.startSection("targetSelector");
         targetTasks.onUpdateTasks();
@@ -1759,7 +1747,7 @@ public abstract class EntityLiving extends Entity
     }
 
     /**
-     * Changes pitch and yaw so that the entity calling the function is facing the entity provided as an argument.
+     * changes pitch and yaw so that the entity calling the function is facing the entity provided as an argument
      */
     public void faceEntity(Entity par1Entity, float par2, float par3)
     {
@@ -2135,8 +2123,8 @@ public abstract class EntityLiving extends Entity
     }
 
     /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
+     * This method return a value to be applyed directly to entity speed, this factor is less than 1 when a slowdown
+     * potion effect is applyed, more than 1 when a haste potion effect is applyed and 2 for fleeing entities.
      */
     protected float getSpeedModifier()
     {

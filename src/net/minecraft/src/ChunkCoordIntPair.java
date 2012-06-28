@@ -6,12 +6,12 @@ public class ChunkCoordIntPair
     public final int chunkXPos;
 
     /** The Z position of this Chunk Coordinate Pair */
-    public final int chunkZPosition;
+    public final int chunkZPos;
 
     public ChunkCoordIntPair(int par1, int par2)
     {
         chunkXPos = par1;
-        chunkZPosition = par2;
+        chunkZPos = par2;
     }
 
     /**
@@ -26,7 +26,7 @@ public class ChunkCoordIntPair
 
     public int hashCode()
     {
-        long l = chunkXZ2Int(chunkXPos, chunkZPosition);
+        long l = chunkXZ2Int(chunkXPos, chunkZPos);
         int i = (int)l;
         int j = (int)(l >> 32);
         return i ^ j;
@@ -35,7 +35,7 @@ public class ChunkCoordIntPair
     public boolean equals(Object par1Obj)
     {
         ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair)par1Obj;
-        return chunkcoordintpair.chunkXPos == chunkXPos && chunkcoordintpair.chunkZPosition == chunkZPosition;
+        return chunkcoordintpair.chunkXPos == chunkXPos && chunkcoordintpair.chunkZPos == chunkZPos;
     }
 
     public int getCenterXPos()
@@ -43,18 +43,18 @@ public class ChunkCoordIntPair
         return (chunkXPos << 4) + 8;
     }
 
-    public int getCenterZPosition()
+    public int getCenterZPos()
     {
-        return (chunkZPosition << 4) + 8;
+        return (chunkZPos << 4) + 8;
     }
 
     public ChunkPosition getChunkPosition(int par1)
     {
-        return new ChunkPosition(getCenterXPos(), par1, getCenterZPosition());
+        return new ChunkPosition(getCenterXPos(), par1, getCenterZPos());
     }
 
     public String toString()
     {
-        return (new StringBuilder()).append("[").append(chunkXPos).append(", ").append(chunkZPosition).append("]").toString();
+        return (new StringBuilder()).append("[").append(chunkXPos).append(", ").append(chunkZPos).append("]").toString();
     }
 }

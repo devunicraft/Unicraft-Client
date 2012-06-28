@@ -264,10 +264,7 @@ public class EnchantmentHelper
         }
     }
 
-    /**
-     * Adds a random enchantment to the specified item. Args: random, itemStack, enchantabilityLevel
-     */
-    public static void addRandomEnchantment(Random par0Random, ItemStack par1ItemStack, int par2)
+    public static void func_48441_a(Random par0Random, ItemStack par1ItemStack, int par2)
     {
         List list = buildEnchantmentList(par0Random, par1ItemStack, par2);
 

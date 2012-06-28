@@ -116,7 +116,15 @@ public class ChunkProvider implements IChunkProvider
     public Chunk provideChunk(int par1, int par2)
     {
         Chunk chunk = (Chunk)chunkMap.getValueByKey(ChunkCoordIntPair.chunkXZ2Int(par1, par2));
-        return chunk != null ? chunk : loadChunk(par1, par2);
+
+        if (chunk == null)
+        {
+            return loadChunk(par1, par2);
+        }
+        else
+        {
+            return chunk;
+        }
     }
 
     /**
@@ -150,32 +158,36 @@ public class ChunkProvider implements IChunkProvider
 
     private void saveChunkExtraData(Chunk par1Chunk)
     {
-        if (chunkLoader != null)
+        if (chunkLoader == null)
         {
-            try
-            {
-                chunkLoader.saveExtraChunkData(worldObj, par1Chunk);
-            }
-            catch (Exception exception)
-            {
-                exception.printStackTrace();
-            }
+            return;
+        }
+
+        try
+        {
+            chunkLoader.saveExtraChunkData(worldObj, par1Chunk);
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
         }
     }
 
     private void saveChunkData(Chunk par1Chunk)
     {
-        if (chunkLoader != null)
+        if (chunkLoader == null)
         {
-            try
-            {
-                par1Chunk.lastSaveTime = worldObj.getWorldTime();
-                chunkLoader.saveChunk(worldObj, par1Chunk);
-            }
-            catch (IOException ioexception)
-            {
-                ioexception.printStackTrace();
-            }
+            return;
+        }
+
+        try
+        {
+            par1Chunk.lastSaveTime = worldObj.getWorldTime();
+            chunkLoader.saveChunk(worldObj, par1Chunk);
+        }
+        catch (IOException ioexception)
+        {
+            ioexception.printStackTrace();
         }
     }
 
@@ -193,7 +205,6 @@ public class ChunkProvider implements IChunkProvider
             if (chunkProvider != null)
             {
                 chunkProvider.populate(par1IChunkProvider, par2, par3);
-                ModLoader.populateChunk(chunkProvider, par2, par3, worldObj);
                 chunk.setChunkModified();
             }
         }
@@ -216,15 +227,17 @@ public class ChunkProvider implements IChunkProvider
                 saveChunkExtraData(chunk);
             }
 
-            if (chunk.needsSaving(par1))
+            if (!chunk.needsSaving(par1))
             {
-                saveChunkData(chunk);
-                chunk.isModified = false;
+                continue;
+            }
 
-                if (++i == 24 && !par1)
-                {
-                    return false;
-                }
+            saveChunkData(chunk);
+            chunk.isModified = false;
+
+            if (++i == 24 && !par1)
+            {
+                return false;
             }
         }
 
@@ -271,7 +284,7 @@ public class ChunkProvider implements IChunkProvider
             }
 
             Chunk chunk = (Chunk)chunkList.get(field_35392_h++);
-            EntityPlayer entityplayer = worldObj.getClosestPlayerHorizontal((double)(chunk.xPosition << 4) + 8D, (double)(chunk.zPosition << 4) + 8D, 288D);
+            EntityPlayer entityplayer = worldObj.func_48456_a((double)(chunk.xPosition << 4) + 8D, (double)(chunk.zPosition << 4) + 8D, 288D);
 
             if (entityplayer == null)
             {
@@ -300,7 +313,7 @@ public class ChunkProvider implements IChunkProvider
      */
     public String makeString()
     {
-        return (new StringBuilder("ServerChunkCache: ")).append(chunkMap.getNumHashElements()).append(" Drop: ").append(droppedChunksSet.size()).toString();
+        return (new StringBuilder()).append("ServerChunkCache: ").append(chunkMap.getNumHashElements()).append(" Drop: ").append(droppedChunksSet.size()).toString();
     }
 
     /**

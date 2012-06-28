@@ -1343,10 +1343,7 @@ public class Chunk
         }
     }
 
-    /**
-     * This method retrieves the biome at a set of coordinates
-     */
-    public BiomeGenBase getBiomeGenForWorldCoords(int par1, int par2, WorldChunkManager par3WorldChunkManager)
+    public BiomeGenBase func_48490_a(int par1, int par2, WorldChunkManager par3WorldChunkManager)
     {
         int i = blockBiomeArray[par2 << 4 | par1] & 0xff;
 
@@ -1393,10 +1390,9 @@ public class Chunk
     }
 
     /**
-     * Called once-per-chunk-per-tick, and advances the round-robin relight check index per-storage-block by up to 8
-     * blocks at a time. In a worst-case scenario, can potentially take up to 1.6 seconds, calculated via
-     * (4096/(8*16))/20, to re-check all blocks in a chunk, which could explain both lagging light updates in certain
-     * cases as well as Nether relight
+     * Called once-per-chunk-per-tick, and advances the round-robin relight check index by up to 8 blocks at a time. In
+     * a worst-case scenario, can potentially take up to 25.6 seconds, calculated via (4096/8)/20, to re-check all
+     * blocks in a chunk, which may explain lagging light updates on initial world generation.
      */
     public void enqueueRelightChecks()
     {

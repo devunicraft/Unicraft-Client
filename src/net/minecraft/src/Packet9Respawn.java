@@ -6,9 +6,7 @@ public class Packet9Respawn extends Packet
 {
     public int respawnDimension;
 
-    /**
-     * The difficulty setting. 0 through 3 for peaceful, easy, normal, hard. The client always sends 1.
-     */
+    /** 0 thru 3 for Peaceful, Easy, Normal, Hard. 1 is always sent c->s */
     public int difficulty;
 
     /** Defaults to 128 */

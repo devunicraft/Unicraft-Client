@@ -29,7 +29,7 @@ public class EntityWolf extends EntityTameable
         texture = "/mob/wolf.png";
         setSize(0.6F, 0.8F);
         moveSpeed = 0.3F;
-        getNavigator().setAvoidsWater(true);
+        getNavigator().func_48664_a(true);
         tasks.addTask(1, new EntityAISwimming(this));
         tasks.addTask(2, aiSit);
         tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
@@ -340,7 +340,7 @@ public class EntityWolf extends EntityTameable
     public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
     {
         Entity entity = par1DamageSource.getEntity();
-        aiSit.setIsSitting(false);
+        aiSit.func_48407_a(false);
 
         if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
         {
@@ -384,15 +384,15 @@ public class EntityWolf extends EntityTameable
                         setTamed(true);
                         setPathToEntity(null);
                         setAttackTarget(null);
-                        aiSit.setIsSitting(true);
+                        aiSit.func_48407_a(true);
                         setEntityHealth(20);
                         setOwner(par1EntityPlayer.username);
-                        playTameEffect(true);
+                        func_48142_a(true);
                         worldObj.setEntityState(this, (byte)7);
                     }
                     else
                     {
-                        playTameEffect(false);
+                        func_48142_a(false);
                         worldObj.setEntityState(this, (byte)6);
                     }
                 }
@@ -426,7 +426,7 @@ public class EntityWolf extends EntityTameable
 
             if (par1EntityPlayer.username.equalsIgnoreCase(getOwnerName()) && !worldObj.isRemote && !isWheat(itemstack))
             {
-                aiSit.setIsSitting(!isSitting());
+                aiSit.func_48407_a(!isSitting());
                 isJumping = false;
                 setPathToEntity(null);
             }
@@ -495,7 +495,7 @@ public class EntityWolf extends EntityTameable
     }
 
     /**
-     * Determines whether this wolf is angry or not.
+     * gets this wolf's angry state
      */
     public boolean isAngry()
     {
@@ -503,7 +503,7 @@ public class EntityWolf extends EntityTameable
     }
 
     /**
-     * Sets whether this wolf is angry or not.
+     * sets this wolf's angry state to true if the boolean argument is true
      */
     public void setAngry(boolean par1)
     {
@@ -535,10 +535,7 @@ public class EntityWolf extends EntityTameable
         looksWithInterest = par1;
     }
 
-    /**
-     * Returns true if the mob is currently able to mate with the specified mob.
-     */
-    public boolean canMateWith(EntityAnimal par1EntityAnimal)
+    public boolean func_48135_b(EntityAnimal par1EntityAnimal)
     {
         if (par1EntityAnimal == this)
         {

@@ -12,10 +12,7 @@ public class PostHttp
     {
     }
 
-    /**
-     * Builds an encoded HTTP POST content string from a string map
-     */
-    public static String buildPostString(Map par0Map)
+    public static String func_52016_a(Map par0Map)
     {
         StringBuilder stringbuilder = new StringBuilder();
         Iterator iterator = par0Map.entrySet().iterator();
@@ -62,18 +59,12 @@ public class PostHttp
         return stringbuilder.toString();
     }
 
-    /**
-     * Sends a HTTP POST request to the given URL with data from a map
-     */
-    public static String sendPost(URL par0URL, Map par1Map, boolean par2)
+    public static String func_52018_a(URL par0URL, Map par1Map, boolean par2)
     {
-        return sendPost(par0URL, buildPostString(par1Map), par2);
+        return func_52017_a(par0URL, func_52016_a(par1Map), par2);
     }
 
-    /**
-     * Sends a HTTP POST request to the given URL with data from a string
-     */
-    public static String sendPost(URL par0URL, String par1Str, boolean par2)
+    public static String func_52017_a(URL par0URL, String par1Str, boolean par2)
     {
         try
         {

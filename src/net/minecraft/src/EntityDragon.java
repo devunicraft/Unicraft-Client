@@ -7,12 +7,8 @@ public class EntityDragon extends EntityDragonBase
     public double targetX;
     public double targetY;
     public double targetZ;
-    public double ringBuffer[][];
-
-    /**
-     * Index into the ring buffer. Incremented once per tick and restarts at 0 once it reaches the end of the buffer.
-     */
-    public int ringBufferIndex;
+    public double field_40162_d[][];
+    public int field_40164_e;
     public EntityDragonPart dragonPartArray[];
 
     /** The head bounding box of a dragon */
@@ -25,24 +21,12 @@ public class EntityDragon extends EntityDragonBase
     public EntityDragonPart dragonPartTail3;
     public EntityDragonPart dragonPartWing1;
     public EntityDragonPart dragonPartWing2;
-
-    /** Animation time at previous tick. */
-    public float prevAnimTime;
-
-    /**
-     * Animation time, used to control the speed of the animation cycles (wings flapping, jaw opening, etc.)
-     */
-    public float animTime;
-
-    /** Force selecting a new flight target at next tick if set to true. */
-    public boolean forceNewTarget;
-
-    /**
-     * Activated if the dragon is flying though obsidian, white stone or bedrock. Slows movement and animation speed.
-     */
-    public boolean slowed;
+    public float field_40173_aw;
+    public float field_40172_ax;
+    public boolean field_40163_ay;
+    public boolean field_40161_az;
     private Entity target;
-    public int deathTicks;
+    public int field_40178_aA;
 
     /** The current endercrystal that is healing this dragon */
     public EntityEnderCrystal healingEnderCrystal;
@@ -50,13 +34,13 @@ public class EntityDragon extends EntityDragonBase
     public EntityDragon(World par1World)
     {
         super(par1World);
-        ringBuffer = new double[64][3];
-        ringBufferIndex = -1;
-        prevAnimTime = 0.0F;
-        animTime = 0.0F;
-        forceNewTarget = false;
-        slowed = false;
-        deathTicks = 0;
+        field_40162_d = new double[64][3];
+        field_40164_e = -1;
+        field_40173_aw = 0.0F;
+        field_40172_ax = 0.0F;
+        field_40163_ay = false;
+        field_40161_az = false;
+        field_40178_aA = 0;
         healingEnderCrystal = null;
         dragonPartArray = (new EntityDragonPart[]
                 {
@@ -78,11 +62,7 @@ public class EntityDragon extends EntityDragonBase
         dataWatcher.addObject(16, new Integer(maxHealth));
     }
 
-    /**
-     * Returns a double[3] array with movement offsets, used to calculate trailing tail/neck positions. [0] = yaw
-     * offset, [1] = y offset, [2] = unused, always 0. Parameters: buffer index offset, partial ticks.
-     */
-    public double[] getMovementOffsets(int par1, float par2)
+    public double[] func_40160_a(int par1, float par2)
     {
         if (health <= 0)
         {
@@ -90,21 +70,21 @@ public class EntityDragon extends EntityDragonBase
         }
 
         par2 = 1.0F - par2;
-        int i = ringBufferIndex - par1 * 1 & 0x3f;
-        int j = ringBufferIndex - par1 * 1 - 1 & 0x3f;
+        int i = field_40164_e - par1 * 1 & 0x3f;
+        int j = field_40164_e - par1 * 1 - 1 & 0x3f;
         double ad[] = new double[3];
-        double d = ringBuffer[i][0];
+        double d = field_40162_d[i][0];
         double d1;
 
-        for (d1 = ringBuffer[j][0] - d; d1 < -180D; d1 += 360D) { }
+        for (d1 = field_40162_d[j][0] - d; d1 < -180D; d1 += 360D) { }
 
         for (; d1 >= 180D; d1 -= 360D) { }
 
         ad[0] = d + d1 * (double)par2;
-        d = ringBuffer[i][1];
-        d1 = ringBuffer[j][1] - d;
+        d = field_40162_d[i][1];
+        d1 = field_40162_d[j][1] - d;
         ad[1] = d + d1 * (double)par2;
-        ad[2] = ringBuffer[i][2] + (ringBuffer[j][2] - ringBuffer[i][2]) * (double)par2;
+        ad[2] = field_40162_d[i][2] + (field_40162_d[j][2] - field_40162_d[i][2]) * (double)par2;
         return ad;
     }
 
@@ -114,7 +94,7 @@ public class EntityDragon extends EntityDragonBase
      */
     public void onLivingUpdate()
     {
-        prevAnimTime = animTime;
+        field_40173_aw = field_40172_ax;
 
         if (!worldObj.isRemote)
         {
@@ -134,35 +114,35 @@ public class EntityDragon extends EntityDragonBase
         float f1 = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10F + 1.0F);
         f1 *= (float)Math.pow(2D, motionY);
 
-        if (slowed)
+        if (field_40161_az)
         {
-            animTime += f1 * 0.5F;
+            field_40172_ax += f1 * 0.5F;
         }
         else
         {
-            animTime += f1;
+            field_40172_ax += f1;
         }
 
         for (; rotationYaw >= 180F; rotationYaw -= 360F) { }
 
         for (; rotationYaw < -180F; rotationYaw += 360F) { }
 
-        if (ringBufferIndex < 0)
+        if (field_40164_e < 0)
         {
-            for (int i = 0; i < ringBuffer.length; i++)
+            for (int i = 0; i < field_40162_d.length; i++)
             {
-                ringBuffer[i][0] = rotationYaw;
-                ringBuffer[i][1] = posY;
+                field_40162_d[i][0] = rotationYaw;
+                field_40162_d[i][1] = posY;
             }
         }
 
-        if (++ringBufferIndex == ringBuffer.length)
+        if (++field_40164_e == field_40162_d.length)
         {
-            ringBufferIndex = 0;
+            field_40164_e = 0;
         }
 
-        ringBuffer[ringBufferIndex][0] = rotationYaw;
-        ringBuffer[ringBufferIndex][1] = posY;
+        field_40162_d[field_40164_e][0] = rotationYaw;
+        field_40162_d[field_40164_e][1] = posY;
 
         if (worldObj.isRemote)
         {
@@ -213,9 +193,9 @@ public class EntityDragon extends EntityDragonBase
                 targetZ += rand.nextGaussian() * 2D;
             }
 
-            if (forceNewTarget || d7 < 100D || d7 > 22500D || isCollidedHorizontally || isCollidedVertically)
+            if (field_40163_ay || d7 < 100D || d7 > 22500D || isCollidedHorizontally || isCollidedVertically)
             {
-                setNewTarget();
+                func_41006_aA();
             }
 
             d3 /= MathHelper.sqrt_double(d1 * d1 + d5 * d5);
@@ -278,7 +258,7 @@ public class EntityDragon extends EntityDragonBase
             float f21 = 0.06F;
             moveFlying(0.0F, -1F, f21 * (f18 * f20 + (1.0F - f20)));
 
-            if (slowed)
+            if (field_40161_az)
             {
                 moveEntity(motionX * 0.80000001192092896D, motionY * 0.80000001192092896D, motionZ * 0.80000001192092896D);
             }
@@ -306,7 +286,7 @@ public class EntityDragon extends EntityDragonBase
         dragonPartWing1.width = 4F;
         dragonPartWing2.height = 3F;
         dragonPartWing2.width = 4F;
-        float f3 = (((float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10F) / 180F) * (float)Math.PI;
+        float f3 = (((float)(func_40160_a(5, 1.0F)[1] - func_40160_a(10, 1.0F)[1]) * 10F) / 180F) * (float)Math.PI;
         float f5 = MathHelper.cos(f3);
         float f6 = -MathHelper.sin(f3);
         float f7 = (rotationYaw * (float)Math.PI) / 180F;
@@ -331,8 +311,8 @@ public class EntityDragon extends EntityDragonBase
             attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
         }
 
-        double ad[] = getMovementOffsets(5, 1.0F);
-        double ad1[] = getMovementOffsets(0, 1.0F);
+        double ad[] = func_40160_a(5, 1.0F);
+        double ad1[] = func_40160_a(0, 1.0F);
         float f11 = MathHelper.sin((rotationYaw * (float)Math.PI) / 180F - randomYawVelocity * 0.01F);
         float f12 = MathHelper.cos((rotationYaw * (float)Math.PI) / 180F - randomYawVelocity * 0.01F);
         dragonPartHead.onUpdate();
@@ -357,7 +337,7 @@ public class EntityDragon extends EntityDragonBase
                 entitydragonpart = dragonPartTail3;
             }
 
-            double ad2[] = getMovementOffsets(12 + j * 2, 1.0F);
+            double ad2[] = func_40160_a(12 + j * 2, 1.0F);
             float f13 = (rotationYaw * (float)Math.PI) / 180F + ((simplifyAngle(ad2[0] - ad[0]) * (float)Math.PI) / 180F) * 1.0F;
             float f14 = MathHelper.sin(f13);
             float f15 = MathHelper.cos(f13);
@@ -369,7 +349,7 @@ public class EntityDragon extends EntityDragonBase
 
         if (!worldObj.isRemote)
         {
-            slowed = destroyBlocksInAABB(dragonPartHead.boundingBox) | destroyBlocksInAABB(dragonPartBody.boundingBox);
+            field_40161_az = destroyBlocksInAABB(dragonPartHead.boundingBox) | destroyBlocksInAABB(dragonPartBody.boundingBox);
         }
     }
 
@@ -474,12 +454,9 @@ public class EntityDragon extends EntityDragonBase
         }
     }
 
-    /**
-     * Sets a new target for the flight AI. It can be a random coordinate or a nearby player.
-     */
-    private void setNewTarget()
+    private void func_41006_aA()
     {
-        forceNewTarget = false;
+        field_40163_ay = false;
 
         if (rand.nextInt(2) == 0 && worldObj.playerEntities.size() > 0)
         {
@@ -598,9 +575,9 @@ public class EntityDragon extends EntityDragonBase
      */
     protected void onDeathUpdate()
     {
-        deathTicks++;
+        field_40178_aA++;
 
-        if (deathTicks >= 180 && deathTicks <= 200)
+        if (field_40178_aA >= 180 && field_40178_aA <= 200)
         {
             float f = (rand.nextFloat() - 0.5F) * 8F;
             float f1 = (rand.nextFloat() - 0.5F) * 4F;
@@ -608,7 +585,7 @@ public class EntityDragon extends EntityDragonBase
             worldObj.spawnParticle("hugeexplosion", posX + (double)f, posY + 2D + (double)f1, posZ + (double)f2, 0.0D, 0.0D, 0.0D);
         }
 
-        if (!worldObj.isRemote && deathTicks > 150 && deathTicks % 5 == 0)
+        if (!worldObj.isRemote && field_40178_aA > 150 && field_40178_aA % 5 == 0)
         {
             for (int i = 1000; i > 0;)
             {
@@ -621,7 +598,7 @@ public class EntityDragon extends EntityDragonBase
         moveEntity(0.0D, 0.10000000149011612D, 0.0D);
         renderYawOffset = rotationYaw += 20F;
 
-        if (deathTicks == 200)
+        if (field_40178_aA == 200)
         {
             for (int j = 10000; j > 0;)
             {
@@ -723,10 +700,7 @@ public class EntityDragon extends EntityDragonBase
         return false;
     }
 
-    /**
-     * Returns the health points of the dragon.
-     */
-    public int getDragonHealth()
+    public int func_41010_ax()
     {
         return dataWatcher.getWatchableObjectInt(16);
     }

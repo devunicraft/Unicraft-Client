@@ -2,17 +2,16 @@ package net.minecraft.src;
 
 class PlayerUsageSnooperThread extends Thread
 {
-    /** The PlayerUsageSnooper object. */
-    final PlayerUsageSnooper snooper;
+    final PlayerUsageSnooper field_52012_a;
 
     PlayerUsageSnooperThread(PlayerUsageSnooper par1PlayerUsageSnooper, String par2Str)
     {
         super(par2Str);
-        snooper = par1PlayerUsageSnooper;
+        field_52012_a = par1PlayerUsageSnooper;
     }
 
     public void run()
     {
-        PostHttp.sendPost(PlayerUsageSnooper.getServerURL(snooper), PlayerUsageSnooper.getDataMap(snooper), true);
+        PostHttp.func_52018_a(PlayerUsageSnooper.func_52023_a(field_52012_a), PlayerUsageSnooper.func_52020_b(field_52012_a), true);
     }
 }

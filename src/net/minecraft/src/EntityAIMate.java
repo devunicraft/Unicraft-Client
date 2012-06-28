@@ -7,21 +7,15 @@ public class EntityAIMate extends EntityAIBase
     private EntityAnimal theAnimal;
     World theWorld;
     private EntityAnimal targetMate;
-
-    /**
-     * Delay preventing a baby from spawning immediately when two mate-able animals find each other.
-     */
-    int spawnBabyDelay;
-
-    /** The speed the creature moves at during mating behavior. */
-    float moveSpeed;
+    int field_48261_b;
+    float field_48262_c;
 
     public EntityAIMate(EntityAnimal par1EntityAnimal, float par2)
     {
-        spawnBabyDelay = 0;
+        field_48261_b = 0;
         theAnimal = par1EntityAnimal;
         theWorld = par1EntityAnimal.worldObj;
-        moveSpeed = par2;
+        field_48262_c = par2;
         setMutexBits(3);
     }
 
@@ -36,7 +30,7 @@ public class EntityAIMate extends EntityAIBase
         }
         else
         {
-            targetMate = getNearbyMate();
+            targetMate = func_48258_h();
             return targetMate != null;
         }
     }
@@ -46,7 +40,7 @@ public class EntityAIMate extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        return targetMate.isEntityAlive() && targetMate.isInLove() && spawnBabyDelay < 60;
+        return targetMate.isEntityAlive() && targetMate.isInLove() && field_48261_b < 60;
     }
 
     /**
@@ -55,7 +49,7 @@ public class EntityAIMate extends EntityAIBase
     public void resetTask()
     {
         targetMate = null;
-        spawnBabyDelay = 0;
+        field_48261_b = 0;
     }
 
     /**
@@ -64,20 +58,16 @@ public class EntityAIMate extends EntityAIBase
     public void updateTask()
     {
         theAnimal.getLookHelper().setLookPositionWithEntity(targetMate, 10F, theAnimal.getVerticalFaceSpeed());
-        theAnimal.getNavigator().tryMoveToEntityLiving(targetMate, moveSpeed);
-        spawnBabyDelay++;
+        theAnimal.getNavigator().func_48667_a(targetMate, field_48262_c);
+        field_48261_b++;
 
-        if (spawnBabyDelay == 60)
+        if (field_48261_b == 60)
         {
-            spawnBaby();
+            func_48257_i();
         }
     }
 
-    /**
-     * Loops through nearby animals and finds another animal of the same type that can be mated with. Returns the first
-     * valid mate found.
-     */
-    private EntityAnimal getNearbyMate()
+    private EntityAnimal func_48258_h()
     {
         float f = 8F;
         List list = theWorld.getEntitiesWithinAABB(theAnimal.getClass(), theAnimal.boundingBox.expand(f, f, f));
@@ -87,7 +77,7 @@ public class EntityAIMate extends EntityAIBase
             Entity entity = (Entity)iterator.next();
             EntityAnimal entityanimal = (EntityAnimal)entity;
 
-            if (theAnimal.canMateWith(entityanimal))
+            if (theAnimal.func_48135_b(entityanimal))
             {
                 return entityanimal;
             }
@@ -96,10 +86,7 @@ public class EntityAIMate extends EntityAIBase
         return null;
     }
 
-    /**
-     * Spawns a baby animal of the same type.
-     */
-    private void spawnBaby()
+    private void func_48257_i()
     {
         EntityAnimal entityanimal = theAnimal.spawnBabyAnimal(targetMate);
 

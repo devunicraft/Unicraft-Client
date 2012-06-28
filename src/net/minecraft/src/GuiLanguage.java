@@ -16,9 +16,7 @@ public class GuiLanguage extends GuiScreen
 
     /** This GUI's language list. */
     private GuiSlotLanguage languageList;
-
-    /** For saving the user's language selection to disk. */
-    private final GameSettings theGameSettings;
+    private final GameSettings field_44006_d;
 
     /** This GUI's 'Done' button. */
     private GuiSmallButton doneButton;
@@ -27,7 +25,7 @@ public class GuiLanguage extends GuiScreen
     {
         updateTimer = -1;
         parentGui = par1GuiScreen;
-        theGameSettings = par2GameSettings;
+        field_44006_d = par2GameSettings;
     }
 
     /**
@@ -54,7 +52,7 @@ public class GuiLanguage extends GuiScreen
         switch (par1GuiButton.id)
         {
             case 6:
-                theGameSettings.saveOptions();
+                field_44006_d.saveOptions();
                 mc.displayGuiScreen(parentGui);
                 break;
 
@@ -112,18 +110,12 @@ public class GuiLanguage extends GuiScreen
         updateTimer--;
     }
 
-    /**
-     * the private theGameSettings field.
-     */
-    static GameSettings Returns(GuiLanguage par0GuiLanguage)
+    static GameSettings func_44005_a(GuiLanguage par0GuiLanguage)
     {
-        return par0GuiLanguage.theGameSettings;
+        return par0GuiLanguage.field_44006_d;
     }
 
-    /**
-     * Returns the private doneButton field.
-     */
-    static GuiSmallButton getDoneButton(GuiLanguage par0GuiLanguage)
+    static GuiSmallButton func_46028_b(GuiLanguage par0GuiLanguage)
     {
         return par0GuiLanguage.doneButton;
     }

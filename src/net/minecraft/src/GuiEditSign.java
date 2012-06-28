@@ -39,7 +39,7 @@ public class GuiEditSign extends GuiScreen
         controlList.clear();
         Keyboard.enableRepeatEvents(true);
         controlList.add(new GuiButton(0, width / 2 - 100, height / 4 + 120, "Done"));
-        entitySign.setEditable(false);
+        entitySign.func_50006_a(false);
     }
 
     /**
@@ -54,7 +54,7 @@ public class GuiEditSign extends GuiScreen
             mc.getSendQueue().addToSendQueue(new Packet130UpdateSign(entitySign.xCoord, entitySign.yCoord, entitySign.zCoord, entitySign.signText));
         }
 
-        entitySign.setEditable(true);
+        entitySign.func_50006_a(true);
     }
 
     /**

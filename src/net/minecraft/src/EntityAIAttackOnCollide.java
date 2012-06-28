@@ -7,11 +7,7 @@ public class EntityAIAttackOnCollide extends EntityAIBase
     World worldObj;
     EntityLiving attacker;
     EntityLiving entityTarget;
-
-    /**
-     * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
-     */
-    int attackTick;
+    int field_46091_d;
     float field_48266_e;
     boolean field_48264_f;
     PathEntity field_48265_g;
@@ -26,7 +22,7 @@ public class EntityAIAttackOnCollide extends EntityAIBase
 
     public EntityAIAttackOnCollide(EntityLiving par1EntityLiving, float par2, boolean par3)
     {
-        attackTick = 0;
+        field_46091_d = 0;
         attacker = par1EntityLiving;
         worldObj = par1EntityLiving.worldObj;
         field_48266_e = par2;
@@ -53,7 +49,7 @@ public class EntityAIAttackOnCollide extends EntityAIBase
         else
         {
             entityTarget = entityliving;
-            field_48265_g = attacker.getNavigator().getPathToEntityLiving(entityTarget);
+            field_48265_g = attacker.getNavigator().func_48679_a(entityTarget);
             return field_48265_g != null;
         }
     }
@@ -108,13 +104,13 @@ public class EntityAIAttackOnCollide extends EntityAIBase
     {
         attacker.getLookHelper().setLookPositionWithEntity(entityTarget, 30F, 30F);
 
-        if ((field_48264_f || attacker.getEntitySenses().canSee(entityTarget)) && --field_48269_i <= 0)
+        if ((field_48264_f || attacker.func_48090_aM().canSee(entityTarget)) && --field_48269_i <= 0)
         {
             field_48269_i = 4 + attacker.getRNG().nextInt(7);
-            attacker.getNavigator().tryMoveToEntityLiving(entityTarget, field_48266_e);
+            attacker.getNavigator().func_48667_a(entityTarget, field_48266_e);
         }
 
-        attackTick = Math.max(attackTick - 1, 0);
+        field_46091_d = Math.max(field_46091_d - 1, 0);
         double d = attacker.width * 2.0F * (attacker.width * 2.0F);
 
         if (attacker.getDistanceSq(entityTarget.posX, entityTarget.boundingBox.minY, entityTarget.posZ) > d)
@@ -122,13 +118,13 @@ public class EntityAIAttackOnCollide extends EntityAIBase
             return;
         }
 
-        if (attackTick > 0)
+        if (field_46091_d > 0)
         {
             return;
         }
         else
         {
-            attackTick = 20;
+            field_46091_d = 20;
             attacker.attackEntityAsMob(entityTarget);
             return;
         }

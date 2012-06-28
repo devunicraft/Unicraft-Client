@@ -46,7 +46,7 @@ public class EntityAIMoveThroughVillage extends EntityAIBase
             return false;
         }
 
-        boolean flag = theEntity.getNavigator().getCanBreakDoors();
+        boolean flag = theEntity.getNavigator().func_48665_b();
         theEntity.getNavigator().setBreakDoors(false);
         field_48291_c = theEntity.getNavigator().getPathToXYZ(doorInfo.posX, doorInfo.posY, doorInfo.posZ);
         theEntity.getNavigator().setBreakDoors(flag);

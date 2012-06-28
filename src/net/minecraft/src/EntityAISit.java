@@ -3,13 +3,11 @@ package net.minecraft.src;
 public class EntityAISit extends EntityAIBase
 {
     private EntityTameable theEntity;
-
-    /** If the EntityTameable is sitting. */
-    private boolean isSitting;
+    private boolean field_48408_b;
 
     public EntityAISit(EntityTameable par1EntityTameable)
     {
-        isSitting = false;
+        field_48408_b = false;
         theEntity = par1EntityTameable;
         setMutexBits(5);
     }
@@ -47,7 +45,7 @@ public class EntityAISit extends EntityAIBase
         }
         else
         {
-            return isSitting;
+            return field_48408_b;
         }
     }
 
@@ -57,7 +55,7 @@ public class EntityAISit extends EntityAIBase
     public void startExecuting()
     {
         theEntity.getNavigator().clearPathEntity();
-        theEntity.setSitting(true);
+        theEntity.func_48140_f(true);
     }
 
     /**
@@ -65,14 +63,11 @@ public class EntityAISit extends EntityAIBase
      */
     public void resetTask()
     {
-        theEntity.setSitting(false);
+        theEntity.func_48140_f(false);
     }
 
-    /**
-     * Sets the sitting flag.
-     */
-    public void setIsSitting(boolean par1)
+    public void func_48407_a(boolean par1)
     {
-        isSitting = par1;
+        field_48408_b = par1;
     }
 }

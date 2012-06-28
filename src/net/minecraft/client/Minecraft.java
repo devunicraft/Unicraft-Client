@@ -307,7 +307,7 @@ public abstract class Minecraft implements Runnable
         tempDisplayHeight = par5;
         fullscreen = par6;
         mcApplet = par3MinecraftApplet;
-        Packet3Chat.maxChatLength = 32767;
+        Packet3Chat.field_52010_b = 32767;
         new ThreadClientSleep(this, "Timer hack thread");
         mcCanvas = par2Canvas;
         displayWidth = par4;
@@ -437,7 +437,7 @@ public abstract class Minecraft implements Runnable
             exception.printStackTrace();
         }
 
-        createAndSendReport();
+        func_52004_D();
         checkGLError("Pre startup");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glShadeModel(GL11.GL_SMOOTH);
@@ -1752,7 +1752,7 @@ public abstract class Minecraft implements Runnable
                             if (Keyboard.getEventKey() == 61)
                             {
                                 gameSettings.showDebugInfo = !gameSettings.showDebugInfo;
-                                gameSettings.field_50119_G = !GuiScreen.isShiftKeyDown();
+                                gameSettings.field_50119_G = !GuiScreen.func_50049_m();
                             }
 
                             if (Keyboard.getEventKey() == 63)
@@ -2436,7 +2436,7 @@ public abstract class Minecraft implements Runnable
     {
         boolean flag = false;
         String s = par0Str;
-        Frame frame = new Frame("Minecraft");
+        Frame frame = new Frame("Unicraft");
         Canvas canvas = new Canvas();
         frame.setLayout(new BorderLayout());
         frame.add(canvas, "Center");
@@ -2487,7 +2487,7 @@ public abstract class Minecraft implements Runnable
     {
         String s = null;
         String s1 = null;
-        s = (new StringBuilder()).append("Player").append(System.currentTimeMillis() % 1000L).toString();
+        s = (new StringBuilder()).append("Unicraftien").append(System.currentTimeMillis() % 1000L).toString();
 
         if (par0ArrayOfStr.length > 0)
         {
@@ -2595,29 +2595,23 @@ public abstract class Minecraft implements Runnable
         }
     }
 
-    /**
-     * Returns the client version string
-     */
-    public static String getVersion()
+    public static String func_52003_C()
     {
         return "1.2.5";
     }
 
-    /**
-     * Creates and sends anonymous system information to Mojang's stats server
-     */
-    public static void createAndSendReport()
+    public static void func_52004_D()
     {
         PlayerUsageSnooper playerusagesnooper = new PlayerUsageSnooper("client");
-        playerusagesnooper.addData("version", getVersion());
-        playerusagesnooper.addData("os_name", System.getProperty("os.name"));
-        playerusagesnooper.addData("os_version", System.getProperty("os.version"));
-        playerusagesnooper.addData("os_architecture", System.getProperty("os.arch"));
-        playerusagesnooper.addData("memory_total", Long.valueOf(Runtime.getRuntime().totalMemory()));
-        playerusagesnooper.addData("memory_max", Long.valueOf(Runtime.getRuntime().maxMemory()));
-        playerusagesnooper.addData("java_version", System.getProperty("java.version"));
-        playerusagesnooper.addData("opengl_version", GL11.glGetString(GL11.GL_VERSION));
-        playerusagesnooper.addData("opengl_vendor", GL11.glGetString(GL11.GL_VENDOR));
-        playerusagesnooper.sendReport();
+        playerusagesnooper.func_52022_a("version", func_52003_C());
+        playerusagesnooper.func_52022_a("os_name", System.getProperty("os.name"));
+        playerusagesnooper.func_52022_a("os_version", System.getProperty("os.version"));
+        playerusagesnooper.func_52022_a("os_architecture", System.getProperty("os.arch"));
+        playerusagesnooper.func_52022_a("memory_total", Long.valueOf(Runtime.getRuntime().totalMemory()));
+        playerusagesnooper.func_52022_a("memory_max", Long.valueOf(Runtime.getRuntime().maxMemory()));
+        playerusagesnooper.func_52022_a("java_version", System.getProperty("java.version"));
+        playerusagesnooper.func_52022_a("opengl_version", GL11.glGetString(GL11.GL_VERSION));
+        playerusagesnooper.func_52022_a("opengl_vendor", GL11.glGetString(GL11.GL_VENDOR));
+        playerusagesnooper.func_52021_a();
     }
 }

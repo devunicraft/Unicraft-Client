@@ -29,7 +29,7 @@ public abstract class EntityAIDoorInteract extends EntityAIBase
         PathNavigate pathnavigate = theEntity.getNavigator();
         PathEntity pathentity = pathnavigate.getPath();
 
-        if (pathentity == null || pathentity.isFinished() || !pathnavigate.getCanBreakDoors())
+        if (pathentity == null || pathentity.isFinished() || !pathnavigate.func_48665_b())
         {
             return false;
         }
@@ -46,7 +46,7 @@ public abstract class EntityAIDoorInteract extends EntityAIBase
                 continue;
             }
 
-            targetDoor = findUsableDoor(entityPosX, entityPosY, entityPosZ);
+            targetDoor = func_48318_a(entityPosX, entityPosY, entityPosZ);
 
             if (targetDoor != null)
             {
@@ -57,7 +57,7 @@ public abstract class EntityAIDoorInteract extends EntityAIBase
         entityPosX = MathHelper.floor_double(theEntity.posX);
         entityPosY = MathHelper.floor_double(theEntity.posY + 1.0D);
         entityPosZ = MathHelper.floor_double(theEntity.posZ);
-        targetDoor = findUsableDoor(entityPosX, entityPosY, entityPosZ);
+        targetDoor = func_48318_a(entityPosX, entityPosY, entityPosZ);
         return targetDoor != null;
     }
 
@@ -94,10 +94,7 @@ public abstract class EntityAIDoorInteract extends EntityAIBase
         }
     }
 
-    /**
-     * Determines if a door can be broken with AI.
-     */
-    private BlockDoor findUsableDoor(int par1, int par2, int par3)
+    private BlockDoor func_48318_a(int par1, int par2, int par3)
     {
         int i = theEntity.worldObj.getBlockId(par1, par2, par3);
 

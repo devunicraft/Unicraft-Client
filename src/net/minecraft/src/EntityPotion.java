@@ -27,10 +27,7 @@ public class EntityPotion extends EntityThrowable
         potionDamage = par8;
     }
 
-    /**
-     * Gets the amount of gravity to apply to the thrown entity with each tick.
-     */
-    protected float getGravityVelocity()
+    protected float func_40075_e()
     {
         return 0.05F;
     }
@@ -54,7 +51,7 @@ public class EntityPotion extends EntityThrowable
     }
 
     /**
-     * Called when this EntityThrowable hits a block or entity.
+     * Called when the throwable hits a block or entity.
      */
     protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
     {

@@ -7,19 +7,16 @@ import java.util.Map;
 
 public class PlayerUsageSnooper
 {
-    /** String map for report data */
-    private Map dataMap;
-
-    /** URL of the server to send the report to */
-    private final URL serverUrl;
+    private Map field_52025_a;
+    private final URL field_52024_b;
 
     public PlayerUsageSnooper(String par1Str)
     {
-        dataMap = new HashMap();
+        field_52025_a = new HashMap();
 
         try
         {
-            serverUrl = new URL((new StringBuilder()).append("http://snoop.minecraft.net/").append(par1Str).toString());
+            field_52024_b = new URL((new StringBuilder()).append("http://snoop.minecraft.net/").append(par1Str).toString());
         }
         catch (MalformedURLException malformedurlexception)
         {
@@ -27,37 +24,25 @@ public class PlayerUsageSnooper
         }
     }
 
-    /**
-     * Adds information to the report
-     */
-    public void addData(String par1Str, Object par2Obj)
+    public void func_52022_a(String par1Str, Object par2Obj)
     {
-        dataMap.put(par1Str, par2Obj);
+        field_52025_a.put(par1Str, par2Obj);
     }
 
-    /**
-     * Starts a new thread to send the information to the report server
-     */
-    public void sendReport()
+    public void func_52021_a()
     {
         PlayerUsageSnooperThread playerusagesnooperthread = new PlayerUsageSnooperThread(this, "reporter");
         playerusagesnooperthread.setDaemon(true);
         playerusagesnooperthread.start();
     }
 
-    /**
-     * Returns the server URL for the given usage snooper
-     */
-    static URL getServerURL(PlayerUsageSnooper par0PlayerUsageSnooper)
+    static URL func_52023_a(PlayerUsageSnooper par0PlayerUsageSnooper)
     {
-        return par0PlayerUsageSnooper.serverUrl;
+        return par0PlayerUsageSnooper.field_52024_b;
     }
 
-    /**
-     * Returns the data map for the given usage snooper
-     */
-    static Map getDataMap(PlayerUsageSnooper par0PlayerUsageSnooper)
+    static Map func_52020_b(PlayerUsageSnooper par0PlayerUsageSnooper)
     {
-        return par0PlayerUsageSnooper.dataMap;
+        return par0PlayerUsageSnooper.field_52025_a;
     }
 }

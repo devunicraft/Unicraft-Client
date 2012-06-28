@@ -4,8 +4,7 @@ import java.io.*;
 
 public class Packet3Chat extends Packet
 {
-    /** Maximum number of characters allowed in chat string in each packet. */
-    public static int maxChatLength = 119;
+    public static int field_52010_b = 119;
 
     /** The message being sent. */
     public String message;
@@ -16,9 +15,9 @@ public class Packet3Chat extends Packet
 
     public Packet3Chat(String par1Str)
     {
-        if (par1Str.length() > maxChatLength)
+        if (par1Str.length() > field_52010_b)
         {
-            par1Str = par1Str.substring(0, maxChatLength);
+            par1Str = par1Str.substring(0, field_52010_b);
         }
 
         message = par1Str;
@@ -29,7 +28,7 @@ public class Packet3Chat extends Packet
      */
     public void readPacketData(DataInputStream par1DataInputStream) throws IOException
     {
-        message = readString(par1DataInputStream, maxChatLength);
+        message = readString(par1DataInputStream, field_52010_b);
     }
 
     /**

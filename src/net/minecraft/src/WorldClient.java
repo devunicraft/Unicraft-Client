@@ -12,9 +12,7 @@ public class WorldClient extends World
 
     /** The packets that need to be sent to the server. */
     private NetClientHandler sendQueue;
-
-    /** The ChunkProviderClient instance */
-    private ChunkProviderClient clientChunkProvider;
+    private ChunkProviderClient field_20915_C;
 
     /**
      * The hash set of entities handled by this client. Uses the entity's ID as the hash set's key.
@@ -75,7 +73,7 @@ public class WorldClient extends World
             }
         }
 
-        clientChunkProvider.unload100OldestChunks();
+        field_20915_C.unload100OldestChunks();
         tickBlocksAndAmbiance();
     }
 
@@ -101,8 +99,8 @@ public class WorldClient extends World
      */
     protected IChunkProvider createChunkProvider()
     {
-        clientChunkProvider = new ChunkProviderClient(this);
-        return clientChunkProvider;
+        field_20915_C = new ChunkProviderClient(this);
+        return field_20915_C;
     }
 
     /**
@@ -125,9 +123,9 @@ public class WorldClient extends World
         {
             ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair)iterator.next();
             int i = chunkcoordintpair.chunkXPos * 16;
-            int j = chunkcoordintpair.chunkZPosition * 16;
+            int j = chunkcoordintpair.chunkZPos * 16;
             Profiler.startSection("getChunk");
-            Chunk chunk = getChunkFromChunkCoords(chunkcoordintpair.chunkXPos, chunkcoordintpair.chunkZPosition);
+            Chunk chunk = getChunkFromChunkCoords(chunkcoordintpair.chunkXPos, chunkcoordintpair.chunkZPos);
             func_48458_a(i, j, chunk);
         }
     }
@@ -151,11 +149,11 @@ public class WorldClient extends World
     {
         if (par3)
         {
-            clientChunkProvider.loadChunk(par1, par2);
+            field_20915_C.loadChunk(par1, par2);
         }
         else
         {
-            clientChunkProvider.unloadChunk(par1, par2);
+            field_20915_C.func_539_c(par1, par2);
         }
 
         if (!par3)
@@ -181,8 +179,7 @@ public class WorldClient extends World
     }
 
     /**
-     * Dismounts the entity (and anything riding the entity), sets the dead flag, and removes the player entity from the
-     * player entity list. Called by the playerLoggedOut function.
+     * Not sure what this does 100%, but from the calling methods this method should be called like this.
      */
     public void setEntityDead(Entity par1Entity)
     {

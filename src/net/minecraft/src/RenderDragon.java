@@ -10,11 +10,7 @@ public class RenderDragon extends RenderLiving
      * be one dragon
      */
     public static EntityDragon entityDragon;
-
-    /**
-     * Reloads the dragon model if not equal to 4. Presumably a leftover debugging field.
-     */
-    private static int updateModelState = 0;
+    private static int field_40284_d = 0;
 
     /** An instance of the dragon model in RenderDragon */
     protected ModelDragon modelDragon;
@@ -31,8 +27,8 @@ public class RenderDragon extends RenderLiving
      */
     protected void rotateDragonBody(EntityDragon par1EntityDragon, float par2, float par3, float par4)
     {
-        float f = (float)par1EntityDragon.getMovementOffsets(7, par4)[0];
-        float f1 = (float)(par1EntityDragon.getMovementOffsets(5, par4)[1] - par1EntityDragon.getMovementOffsets(10, par4)[1]);
+        float f = (float)par1EntityDragon.func_40160_a(7, par4)[0];
+        float f1 = (float)(par1EntityDragon.func_40160_a(5, par4)[1] - par1EntityDragon.func_40160_a(10, par4)[1]);
         GL11.glRotatef(-f, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(f1 * 10F, 1.0F, 0.0F, 0.0F);
         GL11.glTranslatef(0.0F, 0.0F, 1.0F);
@@ -51,14 +47,11 @@ public class RenderDragon extends RenderLiving
         }
     }
 
-    /**
-     * Renders the dragon model. Called by renderModel.
-     */
-    protected void renderDragonModel(EntityDragon par1EntityDragon, float par2, float par3, float par4, float par5, float par6, float par7)
+    protected void func_40280_a(EntityDragon par1EntityDragon, float par2, float par3, float par4, float par5, float par6, float par7)
     {
-        if (par1EntityDragon.deathTicks > 0)
+        if (par1EntityDragon.field_40178_aA > 0)
         {
-            float f = (float)par1EntityDragon.deathTicks / 200F;
+            float f = (float)par1EntityDragon.field_40178_aA / 200F;
             GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             GL11.glAlphaFunc(GL11.GL_GREATER, f);
@@ -92,10 +85,10 @@ public class RenderDragon extends RenderLiving
     {
         entityDragon = par1EntityDragon;
 
-        if (updateModelState != 4)
+        if (field_40284_d != 4)
         {
             mainModel = new ModelDragon(0.0F);
-            updateModelState = 4;
+            field_40284_d = 4;
         }
 
         super.doRenderLiving(par1EntityDragon, par2, par4, par6, par8, par9);
@@ -151,10 +144,10 @@ public class RenderDragon extends RenderLiving
         super.renderEquippedItems(par1EntityDragon, par2);
         Tessellator tessellator = Tessellator.instance;
 
-        if (par1EntityDragon.deathTicks > 0)
+        if (par1EntityDragon.field_40178_aA > 0)
         {
             RenderHelper.disableStandardItemLighting();
-            float f = ((float)par1EntityDragon.deathTicks + par2) / 200F;
+            float f = ((float)par1EntityDragon.field_40178_aA + par2) / 200F;
             float f1 = 0.0F;
 
             if (f > 0.8F)
@@ -206,10 +199,7 @@ public class RenderDragon extends RenderLiving
         }
     }
 
-    /**
-     * Renders the overlay for glowing eyes and the mouth. Called by shouldRenderPass.
-     */
-    protected int renderGlow(EntityDragon par1EntityDragon, int par2, float par3)
+    protected int func_40283_a(EntityDragon par1EntityDragon, int par2, float par3)
     {
         if (par2 == 1)
         {
@@ -245,7 +235,7 @@ public class RenderDragon extends RenderLiving
      */
     protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
     {
-        return renderGlow((EntityDragon)par1EntityLiving, par2, par3);
+        return func_40283_a((EntityDragon)par1EntityLiving, par2, par3);
     }
 
     protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2)
@@ -263,7 +253,7 @@ public class RenderDragon extends RenderLiving
      */
     protected void renderModel(EntityLiving par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7)
     {
-        renderDragonModel((EntityDragon)par1EntityLiving, par2, par3, par4, par5, par6, par7);
+        func_40280_a((EntityDragon)par1EntityLiving, par2, par3, par4, par5, par6, par7);
     }
 
     public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)

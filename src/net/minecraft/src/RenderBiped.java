@@ -69,7 +69,7 @@ public class RenderBiped extends RenderLiving
 
             renderManager.itemRenderer.renderItem(par1EntityLiving, itemstack, 0);
 
-            if (itemstack.getItem().requiresMultipleRenderPasses())
+            if (itemstack.getItem().func_46058_c())
             {
                 renderManager.itemRenderer.renderItem(par1EntityLiving, itemstack, 1);
             }

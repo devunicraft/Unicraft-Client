@@ -596,7 +596,7 @@ public class Item
         return 0;
     }
 
-    public boolean requiresMultipleRenderPasses()
+    public boolean func_46058_c()
     {
         return false;
     }

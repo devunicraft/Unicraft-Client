@@ -223,14 +223,7 @@ public class TileEntityFurnace extends TileEntity implements IInventory
 
                     if (furnaceItemStacks[1] != null)
                     {
-                        if (furnaceItemStacks[1].getItem().func_46056_k())
-                        {
-                            furnaceItemStacks[1] = new ItemStack(furnaceItemStacks[1].getItem().setFull3D());
-                        }
-                        else
-                        {
-                            furnaceItemStacks[1].stackSize--;
-                        }
+                        furnaceItemStacks[1].stackSize--;
 
                         if (furnaceItemStacks[1].stackSize == 0)
                         {
@@ -322,17 +315,10 @@ public class TileEntityFurnace extends TileEntity implements IInventory
         }
         else if (furnaceItemStacks[2].itemID == itemstack.itemID)
         {
-            furnaceItemStacks[2].stackSize += itemstack.stackSize;
+            furnaceItemStacks[2].stackSize++;
         }
 
-        if (furnaceItemStacks[0].getItem().func_46056_k())
-        {
-            furnaceItemStacks[0] = new ItemStack(furnaceItemStacks[0].getItem().setFull3D());
-        }
-        else
-        {
-            furnaceItemStacks[0].stackSize--;
-        }
+        furnaceItemStacks[0].stackSize--;
 
         if (furnaceItemStacks[0].stackSize <= 0)
         {
@@ -378,20 +364,10 @@ public class TileEntityFurnace extends TileEntity implements IInventory
             return 100;
         }
 
-        if (i == Item.blazeRod.shiftedIndex)
-        {
-            return 2400;
-        }
-        else
-        {
-            return ModLoader.addAllFuel(par1ItemStack.itemID, par1ItemStack.getItemDamage());
-        }
+        return i != Item.blazeRod.shiftedIndex ? 0 : 2400;
     }
 
-    /**
-     * Return true if item is a fuel source (getItemBurnTime() > 0).
-     */
-    public static boolean isItemFuel(ItemStack par0ItemStack)
+    public static boolean func_52005_b(ItemStack par0ItemStack)
     {
         return getItemBurnTime(par0ItemStack) > 0;
     }

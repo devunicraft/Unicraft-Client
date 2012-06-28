@@ -11,10 +11,10 @@ public abstract class Packet
     /** Maps packet class to packet id */
     private static Map packetClassToIdMap = new HashMap();
 
-    /** List of the client's packet IDs. */
+    /** list of the client's packets id */
     private static Set clientPacketIdList = new HashSet();
 
-    /** List of the server's packet IDs. */
+    /** list of the server's packets id */
     private static Set serverPacketIdList = new HashSet();
 
     /** the system time in milliseconds when this packet was created. */
@@ -156,7 +156,7 @@ public abstract class Packet
     }
 
     /**
-     * Writes a String to the DataOutputStream
+     * Writes a string to a packet
      */
     public static void writeString(String par0Str, DataOutputStream par1DataOutputStream) throws IOException
     {

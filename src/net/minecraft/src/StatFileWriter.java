@@ -68,10 +68,7 @@ public class StatFileWriter
         return new HashMap(field_25101_b);
     }
 
-    /**
-     * write a whole Map of stats to the statmap
-     */
-    public void writeStats(Map par1Map)
+    public void func_27179_a(Map par1Map)
     {
         if (par1Map == null)
         {

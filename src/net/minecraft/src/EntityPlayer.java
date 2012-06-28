@@ -36,7 +36,7 @@ public abstract class EntityPlayer extends EntityLiving
     public String playerCloakUrl;
 
     /**
-     * Used by EntityPlayer to prevent too many xp orbs from getting absorbed at once.
+     * used by EntityPlayer to prevent too many xp orbs from getting absorbed at once.
      */
     public int xpCooldown;
     public double field_20066_r;
@@ -94,7 +94,7 @@ public abstract class EntityPlayer extends EntityLiving
     public float experience;
 
     /**
-     * This is the item that is in use when the player is holding down the useItemButton (e.g., bow, food, sword)
+     * this is the item that is in use when the player is holding down the useItemButton (e.g., bow, food, sword)
      */
     private ItemStack itemInUse;
 
@@ -433,7 +433,7 @@ public abstract class EntityPlayer extends EntityLiving
 
     public void updateCloak()
     {
-        playerCloakUrl = (new StringBuilder()).append("http://dl.dropbox.com/u/87115331/LauncherUnicraft/Capes/").append(username).append(".png").toString();
+        playerCloakUrl = (new StringBuilder()).append("https://dl.dropbox.com/u/87115331/LauncherUnicraft/Capes/").append(username).append(".png").toString();
         cloakUrl = playerCloakUrl;
     }
 
@@ -996,7 +996,7 @@ public abstract class EntityPlayer extends EntityLiving
 
             if (entitywolf1.isTamed() && entitywolf1.getEntityToAttack() == null && username.equals(entitywolf1.getOwnerName()) && (!par2 || !entitywolf1.isSitting()))
             {
-                entitywolf1.setSitting(false);
+                entitywolf1.func_48140_f(false);
                 entitywolf1.setTarget(par1EntityLiving);
             }
         }
@@ -1232,7 +1232,7 @@ public abstract class EntityPlayer extends EntityLiving
     }
 
     /**
-     * Called when the player performs a critical hit on the Entity. Args: entity that was hit critically
+     * is called when the player performs a critical hit on the Entity. Args: entity that was hit critically
      */
     public void onCriticalHit(Entity entity)
     {
@@ -1558,7 +1558,7 @@ public abstract class EntityPlayer extends EntityLiving
     }
 
     /**
-     * Causes this entity to do an upwards motion (jumping).
+     * jump, Causes this entity to do an upwards motion (jumping)
      */
     protected void jump()
     {
@@ -1745,7 +1745,7 @@ public abstract class EntityPlayer extends EntityLiving
         }
         else
         {
-            if (par1ItemStack.getItem().requiresMultipleRenderPasses())
+            if (par1ItemStack.getItem().func_46058_c())
             {
                 return par1ItemStack.getItem().func_46057_a(par1ItemStack.getItemDamage(), par2);
             }

@@ -24,7 +24,7 @@ public class ChunkProviderLoadOrGenerate implements IChunkProvider
     int lastQueriedChunkXPos;
 
     /** The last Z position of a chunk that was returned from setRecordPlayingMessage */
-    int lastQueriedChunkZPosition;
+    int lastQueriedChunkZPos;
 
     /** The last Chunk that was returned from setRecordPlayingMessage */
     private Chunk lastQueriedChunk;
@@ -63,7 +63,7 @@ public class ChunkProviderLoadOrGenerate implements IChunkProvider
             return false;
         }
 
-        if (par1 == lastQueriedChunkXPos && par2 == lastQueriedChunkZPosition && lastQueriedChunk != null)
+        if (par1 == lastQueriedChunkXPos && par2 == lastQueriedChunkZPos && lastQueriedChunk != null)
         {
             return true;
         }
@@ -90,7 +90,7 @@ public class ChunkProviderLoadOrGenerate implements IChunkProvider
      */
     public Chunk provideChunk(int par1, int par2)
     {
-        if (par1 == lastQueriedChunkXPos && par2 == lastQueriedChunkZPosition && lastQueriedChunk != null)
+        if (par1 == lastQueriedChunkXPos && par2 == lastQueriedChunkZPos && lastQueriedChunk != null)
         {
             return lastQueriedChunk;
         }
@@ -140,7 +140,7 @@ public class ChunkProviderLoadOrGenerate implements IChunkProvider
         }
 
         lastQueriedChunkXPos = par1;
-        lastQueriedChunkZPosition = par2;
+        lastQueriedChunkZPos = par2;
         lastQueriedChunk = chunks[k];
         return chunks[k];
     }

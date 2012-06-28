@@ -9,7 +9,7 @@ public class MovementInputFromOptions extends MovementInput
         gameSettings = par1GameSettings;
     }
 
-    public void updatePlayerMoveState()
+    public void func_52013_a()
     {
         moveStrafe = 0.0F;
         moveForward = 0.0F;

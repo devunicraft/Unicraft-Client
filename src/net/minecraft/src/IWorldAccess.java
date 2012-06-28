@@ -20,7 +20,7 @@ public interface IWorldAccess
     public abstract void markBlockRangeNeedsUpdate(int i, int j, int k, int l, int i1, int j1);
 
     /**
-     * Plays the specified sound. Arg: soundName, x, y, z, volume, pitch
+     * Plays the specified sound. Arg: x, y, z, soundName, unknown1, unknown2
      */
     public abstract void playSound(String s, double d, double d1, double d2, float f, float f1);
 

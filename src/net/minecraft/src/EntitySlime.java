@@ -77,10 +77,7 @@ public class EntitySlime extends EntityLiving implements IMob
         return "slime";
     }
 
-    /**
-     * Returns the name of the sound played when the slime jumps.
-     */
-    protected String getJumpSound()
+    protected String func_40138_aj()
     {
         return "mob.slime";
     }
@@ -113,9 +110,9 @@ public class EntitySlime extends EntityLiving implements IMob
                 worldObj.spawnParticle(getSlimeParticle(), posX + (double)f2, boundingBox.minY, posZ + (double)f3, 0.0D, 0.0D, 0.0D);
             }
 
-            if (makesSoundOnLand())
+            if (func_40134_ak())
             {
-                worldObj.playSoundAtEntity(this, getJumpSound(), getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+                worldObj.playSoundAtEntity(this, func_40138_aj(), getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
             }
 
             field_40139_a = -0.5F;
@@ -136,7 +133,7 @@ public class EntitySlime extends EntityLiving implements IMob
 
         if (onGround && slimeJumpDelay-- <= 0)
         {
-            slimeJumpDelay = getJumpDelay();
+            slimeJumpDelay = func_40131_af();
 
             if (entityplayer != null)
             {
@@ -145,9 +142,9 @@ public class EntitySlime extends EntityLiving implements IMob
 
             isJumping = true;
 
-            if (makesSoundOnJump())
+            if (func_40133_ao())
             {
-                worldObj.playSoundAtEntity(this, getJumpSound(), getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) * 0.8F);
+                worldObj.playSoundAtEntity(this, func_40138_aj(), getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) * 0.8F);
             }
 
             field_40139_a = 1.0F;
@@ -170,10 +167,7 @@ public class EntitySlime extends EntityLiving implements IMob
         field_40139_a = field_40139_a * 0.6F;
     }
 
-    /**
-     * Gets the amount of time the slime needs to wait between jumps.
-     */
-    protected int getJumpDelay()
+    protected int func_40131_af()
     {
         return rand.nextInt(20) + 10;
     }
@@ -213,29 +207,23 @@ public class EntitySlime extends EntityLiving implements IMob
      */
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
-        if (canDamagePlayer())
+        if (func_40137_ah())
         {
             int i = getSlimeSize();
 
-            if (canEntityBeSeen(par1EntityPlayer) && (double)getDistanceToEntity(par1EntityPlayer) < 0.59999999999999998D * (double)i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength()))
+            if (canEntityBeSeen(par1EntityPlayer) && (double)getDistanceToEntity(par1EntityPlayer) < 0.59999999999999998D * (double)i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), func_40130_ai()))
             {
                 worldObj.playSoundAtEntity(this, "mob.slimeattack", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
             }
         }
     }
 
-    /**
-     * Indicates weather the slime is able to damage the player (based upon the slime's size)
-     */
-    protected boolean canDamagePlayer()
+    protected boolean func_40137_ah()
     {
         return getSlimeSize() > 1;
     }
 
-    /**
-     * Gets the amount of damage dealt to the player when "attacked" by the slime.
-     */
-    protected int getAttackStrength()
+    protected int func_40130_ai()
     {
         return getSlimeSize();
     }
@@ -305,18 +293,12 @@ public class EntitySlime extends EntityLiving implements IMob
         return 0;
     }
 
-    /**
-     * Returns true if the slime makes a sound when it jumps (based upon the slime's size)
-     */
-    protected boolean makesSoundOnJump()
+    protected boolean func_40133_ao()
     {
         return getSlimeSize() > 1;
     }
 
-    /**
-     * Returns true if the slime makes a sound when it lands after a jump (based upon the slime's size)
-     */
-    protected boolean makesSoundOnLand()
+    protected boolean func_40134_ak()
     {
         return getSlimeSize() > 2;
     }

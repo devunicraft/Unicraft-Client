@@ -89,8 +89,6 @@ public class SlotCrafting extends Slot
         {
             thePlayer.addStat(AchievementList.bookcase, 1);
         }
-
-        ModLoader.takenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
     }
 
     /**
@@ -104,26 +102,32 @@ public class SlotCrafting extends Slot
         {
             ItemStack itemstack = craftMatrix.getStackInSlot(i);
 
-            if (itemstack != null)
+            if (itemstack == null)
             {
-                craftMatrix.decrStackSize(i, 1);
+                continue;
+            }
 
-                if (itemstack.getItem().hasContainerItem())
-                {
-                    ItemStack itemstack1 = new ItemStack(itemstack.getItem().getContainerItem());
+            craftMatrix.decrStackSize(i, 1);
 
-                    if (!itemstack.getItem().doesContainerItemLeaveCraftingGrid(itemstack) || !thePlayer.inventory.addItemStackToInventory(itemstack1))
-                    {
-                        if (craftMatrix.getStackInSlot(i) == null)
-                        {
-                            craftMatrix.setInventorySlotContents(i, itemstack1);
-                        }
-                        else
-                        {
-                            thePlayer.dropPlayerItem(itemstack1);
-                        }
-                    }
-                }
+            if (!itemstack.getItem().hasContainerItem())
+            {
+                continue;
+            }
+
+            ItemStack itemstack1 = new ItemStack(itemstack.getItem().getContainerItem());
+
+            if (itemstack.getItem().doesContainerItemLeaveCraftingGrid(itemstack) && thePlayer.inventory.addItemStackToInventory(itemstack1))
+            {
+                continue;
+            }
+
+            if (craftMatrix.getStackInSlot(i) == null)
+            {
+                craftMatrix.setInventorySlotContents(i, itemstack1);
+            }
+            else
+            {
+                thePlayer.dropPlayerItem(itemstack1);
             }
         }
     }

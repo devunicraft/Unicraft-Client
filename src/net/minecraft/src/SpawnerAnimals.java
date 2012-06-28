@@ -86,7 +86,7 @@ public final class SpawnerAnimals
 
                         if (!((Boolean)eligibleChunksForSpawning.get(var37)).booleanValue())
                         {
-                            ChunkPosition var36 = getRandomSpawningPointInChunk(par0World, var37.chunkXPos, var37.chunkZPosition);
+                            ChunkPosition var36 = getRandomSpawningPointInChunk(par0World, var37.chunkXPos, var37.chunkZPos);
                             int var12 = var36.x;
                             int var13 = var36.y;
                             int var14 = var36.z;

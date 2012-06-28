@@ -200,15 +200,12 @@ public class TileEntity
         tileEntityInvalid = false;
     }
 
-    /**
-     * Called when a client event is received with the event number and argument, see World.sendClientEvent
-     */
-    public void receiveClientEvent(int i, int j)
+    public void onTileEntityPowered(int i, int j)
     {
     }
 
     /**
-     * Causes the TileEntity to reset all it's cached values for it's container block, blockID, metaData and in the case
+     * causes the TileEntity to reset all it's cached values for it's container block, blockID, metaData and in the case
      * of chests, the adjcacent chest check
      */
     public void updateContainingBlockInfo()

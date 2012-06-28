@@ -20,10 +20,7 @@ public class EntitySmallFireball extends EntityFireball
         setSize(0.3125F, 0.3125F);
     }
 
-    /**
-     * Called when this EntityFireball hits a block or entity.
-     */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void func_40071_a(MovingObjectPosition par1MovingObjectPosition)
     {
         if (!worldObj.isRemote)
         {

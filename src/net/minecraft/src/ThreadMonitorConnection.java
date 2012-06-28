@@ -2,9 +2,7 @@ package net.minecraft.src;
 
 class ThreadMonitorConnection extends Thread
 {
-    /**
-     * This was actually an inner class of NetworkManager, so this field is the reference to 'this' NetworkManager.
-     */
+    /** Reference to the NetworkManager object. */
     final NetworkManager netManager;
 
     ThreadMonitorConnection(NetworkManager par1NetworkManager)

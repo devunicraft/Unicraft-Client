@@ -25,9 +25,7 @@ public class Packet24MobSpawn extends Packet
 
     /** The pitch of the entity. */
     public byte pitch;
-
-    /** The yaw of the entity's head. */
-    public byte headYaw;
+    public byte field_48169_h;
 
     /** Indexed metadata for Mob, terminated by 0x7F */
     private DataWatcher metaData;
@@ -46,7 +44,7 @@ public class Packet24MobSpawn extends Packet
         zPosition = MathHelper.floor_double(par1EntityLiving.posZ * 32D);
         yaw = (byte)(int)((par1EntityLiving.rotationYaw * 256F) / 360F);
         pitch = (byte)(int)((par1EntityLiving.rotationPitch * 256F) / 360F);
-        headYaw = (byte)(int)((par1EntityLiving.rotationYawHead * 256F) / 360F);
+        field_48169_h = (byte)(int)((par1EntityLiving.rotationYawHead * 256F) / 360F);
         metaData = par1EntityLiving.getDataWatcher();
     }
 
@@ -62,7 +60,7 @@ public class Packet24MobSpawn extends Packet
         zPosition = par1DataInputStream.readInt();
         yaw = par1DataInputStream.readByte();
         pitch = par1DataInputStream.readByte();
-        headYaw = par1DataInputStream.readByte();
+        field_48169_h = par1DataInputStream.readByte();
         receivedMetadata = DataWatcher.readWatchableObjects(par1DataInputStream);
     }
 
@@ -78,7 +76,7 @@ public class Packet24MobSpawn extends Packet
         par1DataOutputStream.writeInt(zPosition);
         par1DataOutputStream.writeByte(yaw);
         par1DataOutputStream.writeByte(pitch);
-        par1DataOutputStream.writeByte(headYaw);
+        par1DataOutputStream.writeByte(field_48169_h);
         metaData.writeWatchableObjects(par1DataOutputStream);
     }
 

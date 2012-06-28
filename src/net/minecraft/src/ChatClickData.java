@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 public class ChatClickData
 {
-    public static final Pattern pattern = Pattern.compile("^(?:(https?)://)?([-\\w_\\.]{2,}\\.[a-z]{2,3})(/\\S*)?$");
-    private final FontRenderer fontR;
-    private final ChatLine line;
+    public static final Pattern field_50097_a = Pattern.compile("^(?:(https?)://)?([-\\w_\\.]{2,}\\.[a-z]{2,3})(/\\S*)?$");
+    private final FontRenderer field_50095_b;
+    private final ChatLine field_50096_c;
     private final int field_50093_d;
     private final int field_50094_e;
     private final String field_50091_f;
@@ -19,11 +19,11 @@ public class ChatClickData
 
     public ChatClickData(FontRenderer par1FontRenderer, ChatLine par2ChatLine, int par3, int par4)
     {
-        fontR = par1FontRenderer;
-        line = par2ChatLine;
+        field_50095_b = par1FontRenderer;
+        field_50096_c = par2ChatLine;
         field_50093_d = par3;
         field_50094_e = par4;
-        field_50091_f = par1FontRenderer.trimStringToWidth(par2ChatLine.message, par3);
+        field_50091_f = par1FontRenderer.func_50107_a(par2ChatLine.message, par3);
         field_50092_g = func_50090_c();
     }
 
@@ -32,10 +32,7 @@ public class ChatClickData
         return field_50092_g;
     }
 
-    /**
-     * computes the URI from the clicked chat data object
-     */
-    public URI getURI()
+    public URI func_50089_b()
     {
         String s = func_50088_a();
 
@@ -44,7 +41,7 @@ public class ChatClickData
             return null;
         }
 
-        Matcher matcher = pattern.matcher(s);
+        Matcher matcher = field_50097_a.matcher(s);
 
         if (matcher.matches())
         {
@@ -77,14 +74,14 @@ public class ChatClickData
             i = 0;
         }
 
-        int j = line.message.indexOf(" ", i);
+        int j = field_50096_c.message.indexOf(" ", i);
 
         if (j < 0)
         {
-            j = line.message.length();
+            j = field_50096_c.message.length();
         }
 
-        FontRenderer _tmp = fontR;
-        return FontRenderer.stripColorCodes(line.message.substring(i, j));
+        FontRenderer _tmp = field_50095_b;
+        return FontRenderer.func_52014_d(field_50096_c.message.substring(i, j));
     }
 }

@@ -86,7 +86,7 @@ public class RenderItem extends Render
                 GL11.glPopMatrix();
             }
         }
-        else if (itemstack.getItem().requiresMultipleRenderPasses())
+        else if (itemstack.getItem().func_46058_c())
         {
             GL11.glScalef(0.5F, 0.5F, 0.5F);
             loadTexture("/gui/items.png");
@@ -204,7 +204,7 @@ public class RenderItem extends Render
             renderBlocks.useInventoryTint = true;
             GL11.glPopMatrix();
         }
-        else if (Item.itemsList[par3].requiresMultipleRenderPasses())
+        else if (Item.itemsList[par3].func_46058_c())
         {
             GL11.glDisable(GL11.GL_LIGHTING);
             par2RenderEngine.bindTexture(par2RenderEngine.getTexture("/gui/items.png"));

@@ -38,7 +38,7 @@ public class EntityPlayerSP extends EntityPlayer
 
         if (par3Session != null && par3Session.username != null && par3Session.username.length() > 0)
         {
-            skinUrl = (new StringBuilder()).append("http://dl.dropbox.com/u/87115331/LauncherUnicraft/Skins/").append(par3Session.username).append(".png").toString();
+            skinUrl = (new StringBuilder()).append("https://dl.dropbox.com/u/87115331/LauncherUnicraft/Skins/").append(par3Session.username).append(".png").toString();
         }
 
         username = par3Session.username;
@@ -186,7 +186,7 @@ public class EntityPlayerSP extends EntityPlayer
         boolean flag = movementInput.jump;
         float f = 0.8F;
         boolean flag1 = movementInput.moveForward >= f;
-        movementInput.updatePlayerMoveState();
+        movementInput.func_52013_a();
 
         if (isUsingItem())
         {
@@ -400,7 +400,7 @@ public class EntityPlayerSP extends EntityPlayer
     }
 
     /**
-     * Called when the player performs a critical hit on the Entity. Args: entity that was hit critically
+     * is called when the player performs a critical hit on the Entity. Args: entity that was hit critically
      */
     public void onCriticalHit(Entity par1Entity)
     {

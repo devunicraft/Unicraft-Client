@@ -22,7 +22,7 @@ public class EntityAIRestrictSun extends EntityAIBase
      */
     public void startExecuting()
     {
-        theEntity.getNavigator().setAvoidSun(true);
+        theEntity.getNavigator().func_48680_d(true);
     }
 
     /**
@@ -30,6 +30,6 @@ public class EntityAIRestrictSun extends EntityAIBase
      */
     public void resetTask()
     {
-        theEntity.getNavigator().setAvoidSun(false);
+        theEntity.getNavigator().func_48680_d(false);
     }
 }

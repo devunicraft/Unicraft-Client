@@ -4,38 +4,29 @@ import java.io.*;
 
 public class Packet202PlayerAbilities extends Packet
 {
-    /** Disables player damage. */
-    public boolean disableDamage;
-
-    /** Indicates whether the player is flying or not. */
-    public boolean isFlying;
-
-    /** Whether or not to allow the player to fly when they double jump. */
-    public boolean allowFlying;
-
-    /**
-     * Used to determine if creative mode is enabled, and therefore if items should be depleted on usage
-     */
-    public boolean isCreativeMode;
+    public boolean field_50072_a;
+    public boolean field_50070_b;
+    public boolean field_50071_c;
+    public boolean field_50069_d;
 
     public Packet202PlayerAbilities()
     {
-        disableDamage = false;
-        isFlying = false;
-        allowFlying = false;
-        isCreativeMode = false;
+        field_50072_a = false;
+        field_50070_b = false;
+        field_50071_c = false;
+        field_50069_d = false;
     }
 
     public Packet202PlayerAbilities(PlayerCapabilities par1PlayerCapabilities)
     {
-        disableDamage = false;
-        isFlying = false;
-        allowFlying = false;
-        isCreativeMode = false;
-        disableDamage = par1PlayerCapabilities.disableDamage;
-        isFlying = par1PlayerCapabilities.isFlying;
-        allowFlying = par1PlayerCapabilities.allowFlying;
-        isCreativeMode = par1PlayerCapabilities.isCreativeMode;
+        field_50072_a = false;
+        field_50070_b = false;
+        field_50071_c = false;
+        field_50069_d = false;
+        field_50072_a = par1PlayerCapabilities.disableDamage;
+        field_50070_b = par1PlayerCapabilities.isFlying;
+        field_50071_c = par1PlayerCapabilities.allowFlying;
+        field_50069_d = par1PlayerCapabilities.isCreativeMode;
     }
 
     /**
@@ -43,10 +34,10 @@ public class Packet202PlayerAbilities extends Packet
      */
     public void readPacketData(DataInputStream par1DataInputStream) throws IOException
     {
-        disableDamage = par1DataInputStream.readBoolean();
-        isFlying = par1DataInputStream.readBoolean();
-        allowFlying = par1DataInputStream.readBoolean();
-        isCreativeMode = par1DataInputStream.readBoolean();
+        field_50072_a = par1DataInputStream.readBoolean();
+        field_50070_b = par1DataInputStream.readBoolean();
+        field_50071_c = par1DataInputStream.readBoolean();
+        field_50069_d = par1DataInputStream.readBoolean();
     }
 
     /**
@@ -54,10 +45,10 @@ public class Packet202PlayerAbilities extends Packet
      */
     public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
     {
-        par1DataOutputStream.writeBoolean(disableDamage);
-        par1DataOutputStream.writeBoolean(isFlying);
-        par1DataOutputStream.writeBoolean(allowFlying);
-        par1DataOutputStream.writeBoolean(isCreativeMode);
+        par1DataOutputStream.writeBoolean(field_50072_a);
+        par1DataOutputStream.writeBoolean(field_50070_b);
+        par1DataOutputStream.writeBoolean(field_50071_c);
+        par1DataOutputStream.writeBoolean(field_50069_d);
     }
 
     /**
@@ -65,7 +56,7 @@ public class Packet202PlayerAbilities extends Packet
      */
     public void processPacket(NetHandler par1NetHandler)
     {
-        par1NetHandler.handlePlayerAbilities(this);
+        par1NetHandler.func_50100_a(this);
     }
 
     /**

@@ -179,7 +179,7 @@ public class EntityFireball extends Entity
 
         if (movingobjectposition != null)
         {
-            onImpact(movingobjectposition);
+            func_40071_a(movingobjectposition);
         }
 
         posX += motionX;
@@ -221,10 +221,7 @@ public class EntityFireball extends Entity
         setPosition(posX, posY, posZ);
     }
 
-    /**
-     * Called when this EntityFireball hits a block or entity.
-     */
-    protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
+    protected void func_40071_a(MovingObjectPosition par1MovingObjectPosition)
     {
         if (!worldObj.isRemote)
         {

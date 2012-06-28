@@ -71,6 +71,6 @@ public class EntityAIMoveTowardsTarget extends EntityAIBase
      */
     public void startExecuting()
     {
-        theEntity.getNavigator().tryMoveToXYZ(movePosX, movePosY, movePosZ, field_48330_f);
+        theEntity.getNavigator().func_48666_a(movePosX, movePosY, movePosZ, field_48330_f);
     }
 }

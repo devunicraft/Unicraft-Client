@@ -52,13 +52,10 @@ public abstract class EntityTameable extends EntityAnimal
             setTamed(true);
         }
 
-        aiSit.setIsSitting(par1NBTTagCompound.getBoolean("Sitting"));
+        aiSit.func_48407_a(par1NBTTagCompound.getBoolean("Sitting"));
     }
 
-    /**
-     * Play the taming effect, will either be hearts or smoke depending on status
-     */
-    protected void playTameEffect(boolean par1)
+    protected void func_48142_a(boolean par1)
     {
         String s = "heart";
 
@@ -80,11 +77,11 @@ public abstract class EntityTameable extends EntityAnimal
     {
         if (par1 == 7)
         {
-            playTameEffect(true);
+            func_48142_a(true);
         }
         else if (par1 == 6)
         {
-            playTameEffect(false);
+            func_48142_a(false);
         }
         else
         {
@@ -116,7 +113,7 @@ public abstract class EntityTameable extends EntityAnimal
         return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    public void setSitting(boolean par1)
+    public void func_48140_f(boolean par1)
     {
         byte byte0 = dataWatcher.getWatchableObjectByte(16);
 

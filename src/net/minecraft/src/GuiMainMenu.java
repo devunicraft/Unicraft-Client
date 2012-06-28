@@ -23,6 +23,8 @@ public class GuiMainMenu extends GuiScreen
     /** The splash message. */
     private String splashText;
     private GuiButton multiplayerButton;
+    private GuiButton UnicraftButton1;
+    private int field_35357_f;
 
     /** Timer used to rotate the panorama, increases every tick. */
     private int panoramaTimer;
@@ -31,6 +33,8 @@ public class GuiMainMenu extends GuiScreen
      * Texture allocated for the current viewport of the main menu's panorama background.
      */
     private int viewportTexture;
+
+	private GuiButton UnicraftButton;
 
     public GuiMainMenu()
     {
@@ -115,17 +119,38 @@ public class GuiMainMenu extends GuiScreen
         }
         else if (calendar.get(2) + 1 == 12 && calendar.get(5) == 24)
         {
-            splashText = "Merry X-mas!";
+            splashText = "Joyeux Noël!";
         }
         else if (calendar.get(2) + 1 == 1 && calendar.get(5) == 1)
         {
-            splashText = "Happy new year!";
+            splashText = "Unicraft vous souhaite une bonne année!";
+        }
+        else if (calendar.get(2) + 1 == 4 && calendar.get(5) == 19)
+        {
+            splashText = "Bon anniv', Azurex!";
+        }
+        else if (calendar.get(2) + 1 == 5 && calendar.get(5) == 9)
+        {
+            splashText = "Bon anniv', Licks!";
+        }
+        else if (calendar.get(2) + 1 == 5 && calendar.get(5) == 21)
+        {
+            splashText = "Bon anniv', xForce!";
+        }
+        else if (calendar.get(2) + 1 == 9 && calendar.get(5) == 1)
+        {
+            splashText = "Bon anniv', Fromar!";
+        }
+        else if (calendar.get(2) + 1 == 11 && calendar.get(5) == 23)
+        {
+            splashText = "Bon anniv', Wox!";
         }
 
         StringTranslate stringtranslate = StringTranslate.getInstance();
         int i = height / 4 + 48;
         controlList.add(new GuiButton(1, width / 2 - 100, i, stringtranslate.translateKey("menu.singleplayer")));
-        controlList.add(multiplayerButton = new GuiButton(2, width / 2 - 100, i + 24, stringtranslate.translateKey("menu.multiplayer")));
+        controlList.add(multiplayerButton = new GuiButton(2, width / 2 - 100, i + 12 + 12, 98, 20, stringtranslate.translateKey("menu.multiplayer")));
+        controlList.add(UnicraftButton1 = new GuiButton(6, width / 2 - 0, i + 12 + 12, 98, 20, stringtranslate.translateKey("Unicraft")));
         controlList.add(new GuiButton(3, width / 2 - 100, i + 48, stringtranslate.translateKey("menu.mods")));
 
         if (mc.hideQuitButton)
@@ -179,6 +204,10 @@ public class GuiMainMenu extends GuiScreen
         if (par1GuiButton.id == 4)
         {
             mc.shutdown();
+        }
+        if (par1GuiButton.id == 6)
+        {
+            mc.displayGuiScreen(new GuiConnecting(mc, "109.239.152.55", 25565));
         }
     }
 
@@ -374,8 +403,8 @@ public class GuiMainMenu extends GuiScreen
         GL11.glScalef(f, f, f);
         drawCenteredString(fontRenderer, splashText, 0, -8, 0xffff00);
         GL11.glPopMatrix();
-        drawString(fontRenderer, "Minecraft 1.2.5", 2, height - 10, 0xffffff);
-        String s = "Copyright Mojang AB. Do not distribute!";
+        drawString(fontRenderer, "Unicraft 1.2.5.F", 2, height - 10, 0xffffff);
+        String s = "Copyright DevTeam Unicraft!";
         drawString(fontRenderer, s, width - fontRenderer.getStringWidth(s) - 2, height - 10, 0xffffff);
         super.drawScreen(par1, par2, par3);
     }

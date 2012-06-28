@@ -60,7 +60,7 @@ public class EntityAIRestrictOpenDoor extends EntityAIBase
     public void startExecuting()
     {
         entityObj.getNavigator().setBreakDoors(false);
-        entityObj.getNavigator().setEnterDoors(false);
+        entityObj.getNavigator().func_48663_c(false);
     }
 
     /**
@@ -69,7 +69,7 @@ public class EntityAIRestrictOpenDoor extends EntityAIBase
     public void resetTask()
     {
         entityObj.getNavigator().setBreakDoors(true);
-        entityObj.getNavigator().setEnterDoors(true);
+        entityObj.getNavigator().func_48663_c(true);
         frontDoor = null;
     }
 

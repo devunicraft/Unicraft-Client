@@ -2,13 +2,15 @@ package net.minecraft.src;
 
 public class GenLayerBiome extends GenLayer
 {
-    public static BiomeGenBase biomeArray[];
     private BiomeGenBase allowedBiomes[];
 
     public GenLayerBiome(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
     {
         super(par1);
-        allowedBiomes = biomeArray;
+        allowedBiomes = (new BiomeGenBase[]
+                {
+                    BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.plains, BiomeGenBase.taiga, BiomeGenBase.jungle
+                });
         parent = par3GenLayer;
 
         if (par4WorldType == WorldType.DEFAULT_1_1)
@@ -39,12 +41,16 @@ public class GenLayerBiome extends GenLayer
                 if (k == 0)
                 {
                     ai1[j + i * par3] = 0;
+                    continue;
                 }
-                else if (k == BiomeGenBase.mushroomIsland.biomeID)
+
+                if (k == BiomeGenBase.mushroomIsland.biomeID)
                 {
                     ai1[j + i * par3] = k;
+                    continue;
                 }
-                else if (k == 1)
+
+                if (k == 1)
                 {
                     ai1[j + i * par3] = allowedBiomes[nextInt(allowedBiomes.length)].biomeID;
                 }
@@ -56,13 +62,5 @@ public class GenLayerBiome extends GenLayer
         }
 
         return ai1;
-    }
-
-    static
-    {
-        biomeArray = (new BiomeGenBase[]
-                {
-                    BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.plains, BiomeGenBase.taiga, BiomeGenBase.jungle
-                });
     }
 }

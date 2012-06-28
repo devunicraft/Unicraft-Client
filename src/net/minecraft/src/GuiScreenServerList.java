@@ -5,10 +5,7 @@ import org.lwjgl.input.Keyboard;
 
 public class GuiScreenServerList extends GuiScreen
 {
-    /**
-     * Remembers the last hostname or IP address entered into text field between invocations of the GUI.
-     */
-    private static String lastServerName = "";
+    private static String field_52009_d = "";
 
     /** Needed a change as a local variable was conflicting on construct */
     private final GuiScreen guiScreen;
@@ -43,8 +40,8 @@ public class GuiScreenServerList extends GuiScreen
         controlList.add(new GuiButton(1, width / 2 - 100, height / 4 + 120 + 12, stringtranslate.translateKey("gui.cancel")));
         serverTextField = new GuiTextField(fontRenderer, width / 2 - 100, 116, 200, 20);
         serverTextField.setMaxStringLength(128);
-        serverTextField.setFocused(true);
-        serverTextField.setText(lastServerName);
+        serverTextField.func_50033_b(true);
+        serverTextField.setText(field_52009_d);
         ((GuiButton)controlList.get(0)).enabled = serverTextField.getText().length() > 0 && serverTextField.getText().split(":").length > 0;
     }
 
@@ -54,7 +51,7 @@ public class GuiScreenServerList extends GuiScreen
     public void onGuiClosed()
     {
         Keyboard.enableRepeatEvents(false);
-        lastServerName = serverTextField.getText();
+        field_52009_d = serverTextField.getText();
     }
 
     /**
@@ -83,7 +80,7 @@ public class GuiScreenServerList extends GuiScreen
      */
     protected void keyTyped(char par1, int par2)
     {
-        serverTextField.textboxKeyTyped(par1, par2);
+        serverTextField.func_50037_a(par1, par2);
 
         if (par1 == '\034')
         {
