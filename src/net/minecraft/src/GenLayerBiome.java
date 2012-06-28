@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public class GenLayerBiome extends GenLayer
 {
-    private BiomeGenBase allowedBiomes[];
+    public static BiomeGenBase allowedBiomes[];
 
     public GenLayerBiome(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
     {

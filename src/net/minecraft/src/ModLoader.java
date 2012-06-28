@@ -218,7 +218,7 @@ public final class ModLoader
 
     public static void addBiome(BiomeGenBase biomegenbase)
     {
-        BiomeGenBase abiomegenbase[] = GenLayerBiome.biomeArray;
+        BiomeGenBase abiomegenbase[] = GenLayerBiome.allowedBiomes;
         List list = Arrays.asList(abiomegenbase);
         ArrayList arraylist = new ArrayList();
         arraylist.addAll(list);
@@ -228,7 +228,7 @@ public final class ModLoader
             arraylist.add(biomegenbase);
         }
 
-        GenLayerBiome.biomeArray = (BiomeGenBase[])arraylist.toArray(new BiomeGenBase[0]);
+        GenLayerBiome.allowedBiomes = (BiomeGenBase[])arraylist.toArray(new BiomeGenBase[0]);
     }
 
     public static void addLocalization(String s, String s1)
@@ -830,7 +830,7 @@ public final class ModLoader
 
             if (props.containsKey("grassFix"))
             {
-                RenderBlocks.cfgGrassFix = Boolean.parseBoolean(props.getProperty("grassFix"));
+                RenderBlocks.fancyGrass = Boolean.parseBoolean(props.getProperty("grassFix"));
             }
 
             logger.setLevel(cfgLoggingLevel);
@@ -872,7 +872,7 @@ public final class ModLoader
 
             System.out.println("Done.");
             props.setProperty("loggingLevel", cfgLoggingLevel.getName());
-            props.setProperty("grassFix", Boolean.toString(RenderBlocks.cfgGrassFix));
+            props.setProperty("grassFix", Boolean.toString(RenderBlocks.fancyGrass));
             instance.gameSettings.keyBindings = registerAllKeys(instance.gameSettings.keyBindings);
             instance.gameSettings.loadOptions();
             initStats();
@@ -1626,7 +1626,7 @@ public final class ModLoader
 
     public static void removeBiome(BiomeGenBase biomegenbase)
     {
-        BiomeGenBase abiomegenbase[] = GenLayerBiome.biomeArray;
+        BiomeGenBase abiomegenbase[] = GenLayerBiome.allowedBiomes;
         List list = Arrays.asList(abiomegenbase);
         ArrayList arraylist = new ArrayList();
         arraylist.addAll(list);
@@ -1636,7 +1636,7 @@ public final class ModLoader
             arraylist.remove(biomegenbase);
         }
 
-        GenLayerBiome.biomeArray = (BiomeGenBase[])arraylist.toArray(new BiomeGenBase[0]);
+        GenLayerBiome.allowedBiomes = (BiomeGenBase[])arraylist.toArray(new BiomeGenBase[0]);
     }
 
     public static void removeSpawn(Class class1, EnumCreatureType enumcreaturetype)
